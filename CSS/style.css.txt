@@ -1,0 +1,186 @@
+/* Reset & basic styling */
+body {
+  font-family: 'Inter', sans-serif;
+  background: #0E0E11;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+section {
+  padding: 60px 20px;
+}
+
+/* Headings */
+h1, h2, h3, h4 {
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* Hero / Landing */
+.hero {
+  text-align: center;
+}
+
+.hero img {
+  width: 80%;
+  max-width: 800px;
+  display: block;
+  margin: 20px auto;
+}
+
+.cta {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: 1px solid #fff;
+  transition: 0.3s;
+}
+
+.cta:hover {
+  background: #fff;
+  color: #0E0E11;
+}
+
+/* About Section */
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.content .text {
+  flex: 1 1 50%;
+}
+
+.content .media {
+  flex: 1 1 50%;
+}
+
+.thumbnails img {
+  width: 30%;
+  margin-right: 10px;
+}
+
+/* Projects Grid */
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.grid .item {
+  flex: 1 1 calc(33% - 20px);
+  background: #1A1A1A;
+  padding: 10px;
+}
+
+.grid .item img,
+.grid .item video {
+  width: 100%;
+  display: block;
+}
+
+/* Carousel */
+.carousel {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.carousel-item {
+  display: none;
+  background: #1A1A1A;
+  padding: 10px;
+}
+
+.carousel img,
+.carousel video {
+  width: 100%;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.carousel button.prev,
+.carousel button.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.carousel button.prev { left: 10px; }
+.carousel button.next { right: 10px; }
+
+/* Hidden sections (Investor Panel) */
+.hidden {
+  display: none;
+}
+
+/* Responsive */
+@media(max-width:768px){
+  .content {
+    flex-direction: column;
+  }
+  .grid .item {
+    flex: 1 1 100%;
+  }
+  .thumbnails img {
+    width: 80%;
+    margin-bottom: 10px;
+  }
+}
+
+/* ===== Inter Font (Local Web Fonts) ===== */
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/Inter-Regular.woff2') format('woff2'),
+       url('../fonts/Inter-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/Inter-Medium.woff2') format('woff2'),
+       url('../fonts/Inter-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/Inter-Bold.woff2') format('woff2'),
+       url('../fonts/Inter-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* ===== Base Usage ===== */
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+}
+
+p, a, li, span {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+}
