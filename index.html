@@ -9,12 +9,18 @@
 </head>
 <body>
 
-<!-- Hero Video -->
+<!-- Hero -->
 <header class="hero">
-  <video autoplay muted loop playsinline style="width:100%; height:50vh; object-fit:cover;">
+  <video id="heroVideo" autoplay muted loop playsinline style="width:100%; height:50vh; object-fit:cover;">
     <source src="assets/loop.mp4" type="video/mp4">
-    Your browser does not support the video tag.
   </video>
+  <div id="heroContent" style="display:none;">
+    <img src="images/placeholder.png" style="width:100%; height:50vh; object-fit:cover;">
+    <div class="hero-text">
+      <h1 id="heroTitle"></h1>
+      <p id="heroSubtitle"></p>
+    </div>
+  </div>
 </header>
 
 <!-- Navigation -->
@@ -29,8 +35,8 @@
 
   <!-- Home -->
   <section id="home" class="panel active">
-    <h1>Welcome to My Experimental Multimedia Portfolio</h1>
-    <p>Explore animations, illustrations, videos, and conceptual projects. Click the menu above to navigate.</p>
+    <h1>Welcome to the Experimental Multimedia Portfolio of Mohammad Mozafari</h1>
+    <p>Explore animations, illustrations, videos, and conceptual projects. Use the menu above to navigate sections and discover the ongoing creative work.</p>
   </section>
 
   <!-- About -->
@@ -113,11 +119,32 @@ function showPanel(id){
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
+
+  const heroVideo = document.getElementById('heroVideo');
+  const heroContent = document.getElementById('heroContent');
+
+  if(id === 'portfolio' || id === 'work'){
+    heroVideo.style.display='none';
+    heroContent.style.display='block';
+    document.getElementById('heroTitle').innerText = (id==='portfolio') ? 'Portfolio' : 'Work In Progress';
+    document.getElementById('heroSubtitle').innerText = (id==='portfolio') ? 'Explore artworks by category' : 'Ongoing projects and demos';
+  } else {
+    heroVideo.style.display='block';
+    heroContent.style.display='none';
+  }
 }
 
 function showPortfolio(id){
   document.querySelectorAll('.portfolio-section').forEach(s=>s.style.display='none');
-  document.getElementById(id).style.display='flex';
+  const section = document.getElementById(id);
+  section.style.display='flex';
+
+  // reset animation
+  section.querySelectorAll('.project-card').forEach(card=>{
+    card.style.animation='none';
+    card.offsetHeight; // trigger reflow
+    card.style.animation='';
+  });
 }
 </script>
 
