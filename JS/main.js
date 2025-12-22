@@ -1,88 +1,53 @@
-// Canvas Background Animation
-const canvas = document.getElementById('bgCanvas');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+// JS/main.js
 
-let particles = [];
-class Particle {
-  constructor() {
-    this.x = Math.random() * canvas.width;
-    this.y = Math.random() * canvas.height;
-    this.size = Math.random() * 2 + 1;
-    this.speedX = Math.random() * 0.5 - 0.25;
-    this.speedY = Math.random() * 0.5 - 0.25;
-  }
-  update() {
-    this.x += this.speedX;
-    this.y += this.speedY;
-    if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
-    if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
-  }
-  draw() {
-    ctx.fillStyle = 'rgba(0, 212, 255, 0.3)';
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fill();
-  }
-}
+// تغییر پنل اصلی (Home / About / Portfolio / Work)
+function showPanel(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
 
-for (let i = 0; i < 100; i++) particles.push(new Particle());
+  const heroVideo = document.getElementById('heroVideo');
+  const heroContent = document.getElementById('heroContent');
+  const heroTitle = document.getElementById('heroTitle');
+  const heroSubtitle = document.getElementById('heroSubtitle');
+  const heroImage = document.getElementById('heroImage');
 
-function animate() {
-  ctx.fillStyle = 'rgba(10, 10, 15, 0.1)';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  particles.forEach(p => { p.update(); p.draw(); });
-  requestAnimationFrame(animate);
-}
-animate();
-
-// Smooth Scroll
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    e.preventDefault();
-    document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-  });
-});
-
-// Portfolio Filter
-const filterBtns = document.querySelectorAll('.filter-btn');
-const portfolioItems = document.querySelectorAll('.portfolio-item');
-
-filterBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    filterBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    
-    const filter = btn.dataset.filter;
-    portfolioItems.forEach(item => {
-      if (filter === 'all' || item.dataset.category === filter) {
-        item.style.display = 'block';
-        setTimeout(() => item.classList.add('visible'), 100);
-      } else {
-        item.classList.remove('visible');
-        setTimeout(() => item.style.display = 'none', 500);
-      }
-    });
-  });
-});
-
-// Scroll Animations
-window.addEventListener('scroll', () => {
-  document.querySelectorAll('.portfolio-item').forEach(item => {
-    const rect = item.getBoundingClientRect();
-    if (rect.top < window.innerHeight * 0.8) {
-      item.classList.add('visible');
-    }
-  });
-});
-
-// Navbar Scroll Effect
-window.addEventListener('scroll', () => {
-  const navbar = document.querySelector('.navbar');
-  if (window.scrollY > 100) {
-    navbar.style.background = 'rgba(15, 15, 26, 0.95)';
+  if(id === 'portfolio'){
+    heroVideo.style.display='none';
+    heroContent.style.display='block';
+    heroTitle.innerText = 'Portfolio';
+    heroSubtitle.innerText = 'Explore artworks by category';
+    heroImage.src = 'images/placeholder.png'; // جای تصویر Portfolio
+  } else if(id === 'work'){
+    heroVideo.style.display='none';
+    heroContent.style.display='block';
+    heroTitle.innerText = 'Work In Progress';
+    heroSubtitle.innerText = 'Ongoing projects, pitch deck and demos';
+    heroImage.src = 'images/placeholder.png'; // جای تصویر / دمو ویدیو
   } else {
-    navbar.style.background = 'rgba(255, 255, 255, 0.1)';
+    heroVideo.style.display='block';
+    heroContent.style.display='none';
   }
+}
+
+// نمایش زیر-بخش‌های Portfolio (Painting / Illustration / Video / Animation)
+function showPortfolio(id){
+  document.querySelectorAll('.portfolio-section').forEach(s=>s.style.display='none');
+  const section = document.getElementById(id);
+  section.style.display='flex';
+
+  // بازنشانی انیمیشن کارت‌ها
+  section.querySelectorAll('.project-card').forEach(card=>{
+    card.style.animation='none';
+    card.offsetHeight; // trigger reflow
+    card.style.animation='';
+  });
+}
+
+// اضافه کردن افکت کلیک روی کارت‌ها (اختیاری)
+document.querySelectorAll('.project-card').forEach(card=>{
+  card.addEventListener('click', ()=>{
+    // می‌توان Lightbox / Modal یا لینک به پروژه اضافه کرد
+    console.log('Project clicked:', card.querySelector('h3')?.innerText);
+  });
 });
