@@ -4,7 +4,8 @@ body {margin:0;font-family:'Inter',sans-serif;background:#0E0E11;color:white;}
 /* ===== Hero ===== */
 header.hero {width:100%;height:50vh;overflow:hidden;position:relative;}
 header.hero video {width:100%;height:100%;object-fit:cover;}
-.hero-text {position:absolute;bottom:2rem;left:2rem;text-align:left;}
+.hero-text {position:absolute;bottom:2rem;left:2rem;text-align:left;opacity:0;transform:translateY(20px);transition:all 0.6s ease;}
+.panel.active ~ .hero #heroContent .hero-text {opacity:1; transform:translateY(0);}
 
 /* ===== Navigation ===== */
 nav.panel-menu {display:flex;justify-content:center;gap:3rem;padding:1.5rem;background:#111;position:sticky;top:0;z-index:100;}
@@ -17,63 +18,25 @@ section.panel {display:none;}
 section.panel.active {display:block;}
 
 /* ===== Portfolio Submenu ===== */
-.portfolio-menu {
-  display:flex;
-  justify-content:center;
-  gap:1rem;
-  margin-bottom:2rem;
-}
-.portfolio-menu button {
-  padding:0.5rem 1rem;
-  background:#111;
-  color:white;
-  border:none;
-  cursor:pointer;
-  font-weight:600;
-  transition:background 0.3s;
-}
+.portfolio-menu {display:flex;justify-content:center;gap:1rem;margin-bottom:2rem;}
+.portfolio-menu button {padding:0.5rem 1rem;background:#111;color:white;border:none;cursor:pointer;font-weight:600;transition:background 0.3s;}
 .portfolio-menu button:hover {background:#f39c12;}
 
 /* ===== Portfolio Cards ===== */
 .portfolio-container {display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;}
 .portfolio-section {display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;}
-.project-card {
-  position: relative;
-  overflow: hidden;
-  background:#1a1a1a;
-  width:250px;
-  height:250px;
-  border-radius:8px;
-  cursor:pointer;
-  transition: transform 0.3s;
-}
+.project-card {position: relative;overflow: hidden;background:#1a1a1a;width:250px;height:250px;border-radius:8px;cursor:pointer;transition: transform 0.3s;}
 .project-card img {width:100%; height:100%; object-fit:cover; transition: opacity 0.3s;}
-.overlay-title {
-  position: absolute;
-  bottom:0;
-  width:100%;
-  text-align:center;
-  background:rgba(0,0,0,0.6);
-  color:white;
-  padding:0.5rem 0;
-  font-weight:600;
-  opacity:0;
-  transform: translateY(20px);
-  transition: opacity 0.3s, transform 0.3s;
-}
+.overlay-title {position: absolute;bottom:0;width:100%;text-align:center;background:rgba(0,0,0,0.6);color:white;padding:0.5rem 0;font-weight:600;opacity:0;transform: translateY(20px);transition: opacity 0.3s, transform 0.3s;}
 .project-card:hover img {opacity:0.6;}
 .project-card:hover .overlay-title {opacity:1; transform: translateY(0);}
 
-/* ===== Portfolio animation entry ===== */
-.portfolio-section .project-card {
-  opacity:0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.5s forwards;
-}
-.portfolio-section .project-card:nth-child(1){animation-delay:0.1s;}
-.portfolio-section .project-card:nth-child(2){animation-delay:0.2s;}
-.portfolio-section .project-card:nth-child(3){animation-delay:0.3s;}
-.portfolio-section .project-card:nth-child(4){animation-delay:0.4s;}
+/* ===== Portfolio & Work Animations ===== */
+.portfolio-section .project-card, .grid .project-card {opacity:0;transform:translateY(20px);animation: fadeInUp 0.5s forwards;}
+.portfolio-section .project-card:nth-child(1), .grid .project-card:nth-child(1){animation-delay:0.1s;}
+.portfolio-section .project-card:nth-child(2), .grid .project-card:nth-child(2){animation-delay:0.2s;}
+.portfolio-section .project-card:nth-child(3), .grid .project-card:nth-child(3){animation-delay:0.3s;}
+.portfolio-section .project-card:nth-child(4), .grid .project-card:nth-child(4){animation-delay:0.4s;}
 @keyframes fadeInUp {to {opacity:1; transform:translateY(0);}}
 
 /* ===== Work In Progress Grid ===== */
