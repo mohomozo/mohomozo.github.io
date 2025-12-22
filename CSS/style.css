@@ -1,4 +1,41 @@
-/* کارت‌ها */
+/* ===== Base ===== */
+body {margin:0;font-family:'Inter',sans-serif;background:#0E0E11;color:white;}
+
+/* ===== Hero ===== */
+header.hero {width:100%;height:50vh;overflow:hidden;}
+header.hero video {width:100%;height:100%;object-fit:cover;}
+
+/* ===== Navigation ===== */
+nav.panel-menu {display:flex;justify-content:center;gap:3rem;padding:1.5rem;background:#111;position:sticky;top:0;z-index:100;}
+nav.panel-menu a {color:white;text-decoration:none;font-weight:600;text-transform:uppercase;font-size:1rem;transition:color 0.3s, transform 0.3s;cursor:pointer;}
+nav.panel-menu a:hover {color:#f39c12;transform:translateY(-2px);}
+
+/* ===== Panels ===== */
+main#content {padding:2rem 5%;text-align:center;}
+section.panel {display:none;}
+section.panel.active {display:block;}
+
+/* ===== Portfolio Submenu ===== */
+.portfolio-menu {
+  display:flex;
+  justify-content:center;
+  gap:1rem;
+  margin-bottom:2rem;
+}
+.portfolio-menu button {
+  padding:0.5rem 1rem;
+  background:#111;
+  color:white;
+  border:none;
+  cursor:pointer;
+  font-weight:600;
+  transition:background 0.3s;
+}
+.portfolio-menu button:hover {background:#f39c12;}
+
+/* ===== Portfolio Cards ===== */
+.portfolio-container {display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;}
+.portfolio-section {display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;}
 .project-card {
   position: relative;
   overflow: hidden;
@@ -9,15 +46,12 @@
   cursor:pointer;
   transition: transform 0.3s;
 }
-
 .project-card img {
   width:100%;
   height:100%;
   object-fit:cover;
   transition: opacity 0.3s;
 }
-
-/* Overlay Title */
 .overlay-title {
   position: absolute;
   bottom:0;
@@ -31,27 +65,16 @@
   transform: translateY(20px);
   transition: opacity 0.3s, transform 0.3s;
 }
+.project-card:hover img {opacity:0.6;}
+.project-card:hover .overlay-title {opacity:1; transform: translateY(0);}
 
-/* افکت Hover */
-.project-card:hover img {
-  opacity:0.6;
-}
-.project-card:hover .overlay-title {
-  opacity:1;
-  transform: translateY(0);
-}
+/* ===== Work In Progress Grid ===== */
+.grid {display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;margin-top:1rem;}
+.project-card h3{margin:0.5rem 0 0.2rem;}
+.project-card p{font-size:0.9rem;line-height:1.4;}
 
-/* انیمیشن ورود ساده */
-.portfolio-section .project-card {
-  opacity:0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.5s forwards;
-}
-.portfolio-section .project-card:nth-child(1){animation-delay:0.1s;}
-.portfolio-section .project-card:nth-child(2){animation-delay:0.2s;}
-.portfolio-section .project-card:nth-child(3){animation-delay:0.3s;}
-.portfolio-section .project-card:nth-child(4){animation-delay:0.4s;}
-
-@keyframes fadeInUp {
-  to {opacity:1; transform:translateY(0);}
+/* ===== Responsive ===== */
+@media(max-width:768px){
+  nav.panel-menu{flex-direction:column;gap:1rem;}
+  .portfolio-container, .grid{flex-direction:column;align-items:center;}
 }
