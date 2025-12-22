@@ -14,8 +14,9 @@
   <video id="heroVideo" autoplay muted loop playsinline style="width:100%; height:50vh; object-fit:cover;">
     <source src="assets/loop.mp4" type="video/mp4">
   </video>
+  
   <div id="heroContent" style="display:none;">
-    <img src="images/placeholder.png" style="width:100%; height:50vh; object-fit:cover;">
+    <img id="heroImage" src="images/placeholder.png" style="width:100%; height:50vh; object-fit:cover;">
     <div class="hero-text">
       <h1 id="heroTitle"></h1>
       <p id="heroSubtitle"></p>
@@ -35,8 +36,8 @@
 
   <!-- Home -->
   <section id="home" class="panel active">
-    <h1>Welcome to the Experimental Multimedia Portfolio of Mohammad Mozafari</h1>
-    <p>Explore animations, illustrations, videos, and conceptual projects. Use the menu above to navigate sections and discover the ongoing creative work.</p>
+    <h1>Mohammad Mozafari</h1>
+    <p>Experimental Multimedia Artist — exploring animation, illustration, video, and conceptual work across hybrid media.</p>
   </section>
 
   <!-- About -->
@@ -103,10 +104,12 @@
       <div class="project-card">
         <img src="images/placeholder.png" alt="Project A">
         <h3>Project A</h3>
+        <p>Demo video / Pitch deck placeholder</p>
       </div>
       <div class="project-card">
         <img src="images/placeholder.png" alt="Project B">
         <h3>Project B</h3>
+        <p>Demo video / Pitch deck placeholder</p>
       </div>
     </div>
   </section>
@@ -122,12 +125,22 @@ function showPanel(id){
 
   const heroVideo = document.getElementById('heroVideo');
   const heroContent = document.getElementById('heroContent');
+  const heroTitle = document.getElementById('heroTitle');
+  const heroSubtitle = document.getElementById('heroSubtitle');
+  const heroImage = document.getElementById('heroImage');
 
-  if(id === 'portfolio' || id === 'work'){
+  if(id === 'portfolio'){
     heroVideo.style.display='none';
     heroContent.style.display='block';
-    document.getElementById('heroTitle').innerText = (id==='portfolio') ? 'Portfolio' : 'Work In Progress';
-    document.getElementById('heroSubtitle').innerText = (id==='portfolio') ? 'Explore artworks by category' : 'Ongoing projects and demos';
+    heroTitle.innerText = 'Portfolio';
+    heroSubtitle.innerText = 'Explore artworks by category';
+    heroImage.src = 'images/placeholder.png';
+  } else if(id === 'work'){
+    heroVideo.style.display='none';
+    heroContent.style.display='block';
+    heroTitle.innerText = 'Work In Progress';
+    heroSubtitle.innerText = 'Ongoing projects, pitch deck and demos';
+    heroImage.src = 'images/placeholder.png'; // جای ویدیو یا دمو
   } else {
     heroVideo.style.display='block';
     heroContent.style.display='none';
