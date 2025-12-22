@@ -3,163 +3,179 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mohomozo Portfolio - SPA</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="CSS/style.css">
+<title>Mohammad Mozafari - Experimental Multimedia Artist</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div id="particles"></div>
 
 <!-- Hero -->
-<header class="hero">
-  <video id="heroVideo" autoplay muted loop playsinline style="width:100%; height:50vh; object-fit:cover;">
-    <source src="assets/loop.mp4" type="video/mp4">
-  </video>
-  
-  <div id="heroContent" style="display:none;">
-    <img id="heroImage" src="images/placeholder.png" style="width:100%; height:50vh; object-fit:cover;">
-    <div class="hero-text">
-      <h1 id="heroTitle"></h1>
-      <p id="heroSubtitle"></p>
-    </div>
+<section class="hero" id="home">
+  <div class="hero-content">
+    <h1>Mohammad Mozafari</h1>
+    <p>Experimental Multimedia Artist exploring animation, illustration, surrealism, and conceptual work across hybrid media</p>
+    <a href="#portfolio" class="cta-button" onclick="scrollToSection('portfolio')">
+      <i class="fas fa-arrow-down"></i> Explore Portfolio
+    </a>
   </div>
-</header>
+</section>
 
-<!-- Navigation -->
-<nav class="panel-menu">
-  <a onclick="showPanel('home')">Home</a>
-  <a onclick="showPanel('about')">About</a>
-  <a onclick="showPanel('portfolio')">Portfolio</a>
-  <a onclick="showPanel('work')">Work In Progress</a>
+<!-- Floating Navigation -->
+<nav class="floating-nav">
+  <div class="nav-item active" onclick="scrollToSection('home')" data-section="home"><i class="fas fa-home"></i></div>
+  <div class="nav-item" onclick="scrollToSection('about')" data-section="about"><i class="fas fa-user"></i></div>
+  <div class="nav-item" onclick="scrollToSection('portfolio')" data-section="portfolio"><i class="fas fa-images"></i></div>
+  <div class="nav-item" onclick="scrollToSection('work')" data-section="work"><i class="fas fa-cogs"></i></div>
+  <div class="nav-item" onclick="scrollToSection('contact')" data-section="contact"><i class="fas fa-envelope"></i></div>
 </nav>
 
-<main id="content">
+<!-- About -->
+<section id="about" class="fade-in">
+  <h1 class="section-title">About Me</h1>
+  <p class="about-text">
+    Mohammad Mozafari is an experimental multimedia artist whose practice spans animation, theater-based video production, 
+    painting, illustration, sculpture, and conceptual video art. His work explores emotional states, subconscious narratives, 
+    and the tension between personal identity and collective experience through surrealist symbolism and scientific precision.
+  </p>
+</section>
 
-  <!-- Home -->
-  <section id="home" class="panel active">
-    <h1>Mohammad Mozafari</h1>
-    <p>Experimental Multimedia Artist — exploring animation, illustration, video, and conceptual work across hybrid media.</p>
-  </section>
-
-  <!-- About -->
-  <section id="about" class="panel">
-    <h1>About Me</h1>
-    <p>Mohammad Mozafari is an experimental multimedia artist whose practice spans animation, theater-based video production, painting, illustration, sculpture, and conceptual video art. His work explores emotional states, subconscious narratives, and the tension between personal identity and collective experience.</p>
-  </section>
-
-  <!-- Portfolio -->
-  <section id="portfolio" class="panel">
-    <h1>Portfolio</h1>
-
-    <!-- Submenu / Four cards -->
-    <div class="portfolio-menu">
-      <button onclick="showPortfolio('painting')">Painting</button>
-      <button onclick="showPortfolio('illustration')">Illustration</button>
-      <button onclick="showPortfolio('video')">Video</button>
-      <button onclick="showPortfolio('animation')">Animation</button>
-    </div>
-
-    <div class="portfolio-container">
-      <!-- Painting -->
-      <div class="portfolio-section" id="painting">
-        <div class="project-card overlay">
-          <img src="images/placeholder.png" alt="Painting 1">
-          <div class="overlay-title">Painting</div>
-        </div>
-        <div class="project-card overlay">
-          <img src="images/placeholder.png" alt="Painting 2">
-          <div class="overlay-title">Painting</div>
-        </div>
-      </div>
-
-      <!-- Illustration -->
-      <div class="portfolio-section" id="illustration" style="display:none;">
-        <div class="project-card overlay">
-          <img src="images/placeholder.png" alt="Illustration 1">
-          <div class="overlay-title">Illustration</div>
-        </div>
-      </div>
-
-      <!-- Video -->
-      <div class="portfolio-section" id="video" style="display:none;">
-        <div class="project-card overlay">
-          <img src="images/placeholder.png" alt="Video 1">
-          <div class="overlay-title">Video</div>
-        </div>
-      </div>
-
-      <!-- Animation -->
-      <div class="portfolio-section" id="animation" style="display:none;">
-        <div class="project-card overlay">
-          <img src="images/placeholder.png" alt="Animation 1">
-          <div class="overlay-title">Animation</div>
-        </div>
+<!-- Portfolio -->
+<section id="portfolio" class="fade-in">
+  <h1 class="section-title">Portfolio</h1>
+  <div class="portfolio-grid">
+    <div class="project-card">
+      <img src="images/placeholder.png" alt="Painting">
+      <div class="card-overlay">
+        <div class="card-title">Surreal Portrait Series</div>
+        <div class="card-category">Painting</div>
       </div>
     </div>
-  </section>
-
-  <!-- Work In Progress -->
-  <section id="work" class="panel">
-    <h1>Ongoing Projects</h1>
-    <div class="grid">
-      <div class="project-card">
-        <img src="images/placeholder.png" alt="Project A">
-        <h3>Project A</h3>
-        <p>Demo video / Pitch deck placeholder</p>
-      </div>
-      <div class="project-card">
-        <img src="images/placeholder.png" alt="Project B">
-        <h3>Project B</h3>
-        <p>Demo video / Pitch deck placeholder</p>
+    <div class="project-card">
+      <img src="images/placeholder.png" alt="Illustration">
+      <div class="card-overlay">
+        <div class="card-title">Paleontological Reconstructions</div>
+        <div class="card-category">Scientific Illustration</div>
       </div>
     </div>
-  </section>
+    <div class="project-card">
+      <img src="images/placeholder.png" alt="Animation">
+      <div class="card-overlay">
+        <div class="card-title">Stop-Motion Experiments</div>
+        <div class="card-category">Animation</div>
+      </div>
+    </div>
+    <div class="project-card">
+      <img src="images/placeholder.png" alt="Video">
+      <div class="card-overlay">
+        <div class="card-title">Conceptual Video Art</div>
+        <div class="card-category">Video</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-</main>
+<!-- Work In Progress -->
+<section id="work" class="fade-in">
+  <h1 class="section-title">Work In Progress</h1>
+  <div class="wip-item">
+    <video class="wip-video" src="assets/loop.mp4" muted loop playsinline></video>
+    <div class="wip-info">
+      <h3>Animation Short Film</h3>
+      <p>Developing surreal narrative with stop-motion and 2D hybrid techniques. Pitch deck and animatic in progress.</p>
+    </div>
+  </div>
+  <div class="wip-item">
+    <video class="wip-video" src="assets/loop.mp4" muted loop playsinline></video>
+    <div class="wip-info">
+      <h3>Middle School Art Curriculum</h3>
+      <p>Creating multimedia lesson plans integrating Gardner's multiple intelligences and surrealism pedagogy.</p>
+    </div>
+  </div>
+</section>
+<!-- Contact -->
+<section id="contact" class="fade-in">
+  <h1 class="section-title">Get In Touch</h1>
+  <div class="contact-grid">
+    <div class="contact-item">
+      <i class="fas fa-envelope" class="contact-icon"></i>
+      <a href="mailto:hello@mohomozo.com" class="contact-link">hello@mohomozo.com</a>
+    </div>
+    <div class="contact-item">
+      <i class="fab fa-github" class="contact-icon"></i>
+      <a href="https://github.com/yourusername" class="contact-link" target="_blank">GitHub</a>
+    </div>
+    <div class="contact-item">
+      <i class="fab fa-instagram" class="contact-icon"></i>
+      <a href="https://instagram.com/mohomozo" class="contact-link" target="_blank">Instagram</a>
+    </div>
+    <div class="contact-item">
+      <i class="fas fa-file-pdf" class="contact-icon"></i>
+      <a href="cv.pdf" class="contact-link" download>Download CV</a>
+    </div>
+  </div>
+</section>
 
-<!-- JS for SPA and Portfolio -->
 <script>
-function showPanel(id){
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
+const sections = ['home','about','portfolio','work','contact'];
+let currentSection = 'home';
 
-  const heroVideo = document.getElementById('heroVideo');
-  const heroContent = document.getElementById('heroContent');
-  const heroTitle = document.getElementById('heroTitle');
-  const heroSubtitle = document.getElementById('heroSubtitle');
-  const heroImage = document.getElementById('heroImage');
-
-  if(id === 'portfolio'){
-    heroVideo.style.display='none';
-    heroContent.style.display='block';
-    heroTitle.innerText = 'Portfolio';
-    heroSubtitle.innerText = 'Explore artworks by category';
-    heroImage.src = 'images/placeholder.png';
-  } else if(id === 'work'){
-    heroVideo.style.display='none';
-    heroContent.style.display='block';
-    heroTitle.innerText = 'Work In Progress';
-    heroSubtitle.innerText = 'Ongoing projects, pitch deck and demos';
-    heroImage.src = 'images/placeholder.png'; // جای ویدیو یا دمو
-  } else {
-    heroVideo.style.display='block';
-    heroContent.style.display='none';
-  }
+function scrollToSection(sectionId) {
+  document.getElementById(sectionId).scrollIntoView({behavior:'smooth'});
+  
+  document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+  document.querySelector([data-section="${sectionId}"]).classList.add('active');
+  
+  currentSection = sectionId;
 }
 
-function showPortfolio(id){
-  document.querySelectorAll('.portfolio-section').forEach(s=>s.style.display='none');
-  const section = document.getElementById(id);
-  section.style.display='flex';
-
-  // reset animation
-  section.querySelectorAll('.project-card').forEach(card=>{
-    card.style.animation='none';
-    card.offsetHeight; // trigger reflow
-    card.style.animation='';
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  
+  document.getElementById('particles').style.transform = 
+    translateY(${scrollY * 0.5}px);
+  
+  document.querySelectorAll('.fade-in').forEach(section => {
+    const rect = section.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.8) {
+      section.classList.add('visible');
+    }
   });
-}
-</script>
+  
+  sections.forEach(section => {
+    const el = document.getElementById(section);
+    const rect = el.getBoundingClientRect();
+    if (rect.top <= 100 && rect.bottom >= 100) {
+      document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+      document.querySelector([data-section="${section}"]).classList.add('active');
+    }
+  });
+});
 
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+document.querySelector('.hero').addEventListener('mousemove', (e) => {
+  const rect = e.currentTarget.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  const centerX = rect.width / 2;
+  const centerY = rect.height / 2;
+  const rotateX = (y - centerY) / 10;
+  const rotateY = (centerX - x) / 10;
+  
+  e.currentTarget.style.transform = perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg);
+});
+
+document.querySelector('.hero').addEventListener('mouseleave', () => {
+  document.querySelector('.hero').style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+});
+</script>
 </body>
 </html>
