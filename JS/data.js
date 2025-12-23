@@ -1,70 +1,73 @@
 const myProjects = [
-    // --- ANIMATION ---
+    // --- بخش انیمیشن (ANIMATION) ---
     {
         category: 'animation',
-        title: 'MOHOMOZO - Animation Reel',
+        title: 'Animation Reel',
         dimensions: 'FHD',
-        material: 'Digital Animation / Mixed Media',
-        concept: 'مجموعه‌ای از تجربیات متحرک‌سازی و کاوش در فرم‌های بصری متغیر.',
-        image: 'https://vumbnail.com/689181790.jpg', // پیش‌نمایش خودکار از ویمئو
+        material: 'Digital Animation',
+        concept: 'مجموعه‌ای از تجربیات متحرک‌سازی و کاوش در فرم‌های بصری.',
+        image: 'https://vumbnail.com/689181790.jpg',
         videoUrl: 'https://player.vimeo.com/video/689181790'
     },
     {
         category: 'animation',
-        title: 'Character Study',
+        title: 'Experimental Motion 01',
         dimensions: 'FHD',
-        material: '2D Animation',
-        concept: 'بررسی حرکات و آناتومی در فضای دیجیتال.',
+        material: 'Digital Animation',
+        concept: 'بررسی ریتم و حرکت در فضاهای انتزاعی.',
         image: 'https://vumbnail.com/799850813.jpg',
         videoUrl: 'https://player.vimeo.com/video/799850813'
     },
     {
         category: 'animation',
-        title: 'Experimental Motion',
+        title: 'Experimental Motion 02',
         dimensions: 'FHD',
-        material: 'Experimental',
-        concept: 'ترکیب تکنیک‌های مختلف برای ایجاد حس تعلیق در حرکت.',
+        material: 'Digital Animation',
+        concept: 'کاوش در فیزیک اجسام و متریال‌های متغیر.',
         image: 'https://vumbnail.com/911468451.jpg',
         videoUrl: 'https://player.vimeo.com/video/911468451'
     },
 
-    // --- VIDEO ---
+    // --- بخش ویدیو (VIDEO) ---
     {
         category: 'video',
-        title: 'Visual Journey I',
+        title: 'Video Art I',
         dimensions: '4K',
-        material: 'Video Art',
-        concept: 'کاوشی در تصاویر انتزاعی و محیطی.',
+        material: 'Video / Sound',
+        concept: 'تلفیق تصویر و صدا برای ایجاد تجربه‌ای غوطه‌ورکننده.',
         image: 'https://vumbnail.com/906983541.jpg',
         videoUrl: 'https://player.vimeo.com/video/906983541'
     },
     {
         category: 'video',
-        title: 'Visual Journey II',
+        title: 'Video Art II',
         dimensions: '4K',
-        material: 'Video Art',
-        concept: 'ادامه پروژه‌های ویدیو آرت با تمرکز بر نور و سایه.',
+        material: 'Video / Sound',
+        concept: 'ادامه کاوش در فرم‌های بصری و روایتی غیرخطی.',
         image: 'https://vumbnail.com/906984919.jpg',
         videoUrl: 'https://player.vimeo.com/video/906984919'
     },
     {
         category: 'video',
-        title: 'Performance Video',
+        title: 'Performance Capture',
         dimensions: 'FHD',
         material: 'Multimedia',
-        concept: 'ثبت و بازنمایی ویدئویی از یک اجرای هنری.',
+        concept: 'مستندنگاری ویدئویی از یک پرفورمنس تجربی.',
         image: 'https://vumbnail.com/906986112.jpg',
         videoUrl: 'https://player.vimeo.com/video/906986112'
     },
 
-    // --- WORK IN PROGRESS (W.I.P) ---
+    // --- بخش در حال اجرا (W.I.P) ---
     {
         category: 'work',
-        title: 'Ongoing Project 2024',
-        dimensions: 'Developing',
+        title: 'Ongoing Multimedia Project',
+        dimensions: 'Variable',
         material: 'Mixed Media',
-        concept: 'این پروژه در حال حاضر در مرحله توسعه قرار دارد و نسخه‌های اولیه آن در حال تدوین است.',
+        concept: 'این پروژه در حال حاضر در مرحله توسعه و پیش‌تولید قرار دارد.',
         image: 'https://vumbnail.com/906988251.jpg',
         videoUrl: 'https://player.vimeo.com/video/906988251'
     }
 ];
+
+// اطمینان از اینکه متغیر برای بقیه کدها در دسترس است
+console.log("Data loaded successfully:", myProjects.length, "items.");
