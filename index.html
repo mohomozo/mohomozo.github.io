@@ -1,165 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mohomozo Portfolio - SPA</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="CSS/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohammad Mozafari | Multimedia Artist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
 
-<!-- Hero -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <span class="close-btn">&times;</span>
+    <img id="lightbox-img" src="" alt="">
+</div>
+
 <header class="hero">
-  <video id="heroVideo" autoplay muted loop playsinline style="width:100%; height:50vh; object-fit:cover;">
-    <source src="assets/loop.mp4" type="video/mp4">
-  </video>
-  
-  <div id="heroContent" style="display:none;">
-    <img id="heroImage" src="images/placeholder.png" style="width:100%; height:50vh; object-fit:cover;">
-    <div class="hero-text">
-      <h1 id="heroTitle"></h1>
-      <p id="heroSubtitle"></p>
+    <div class="video-container">
+        <video id="heroVideo" autoplay muted loop playsinline webkit-playsinline>
+            <source src="assets/loop.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
     </div>
-  </div>
+    
+    <div id="heroContent" class="hero-content-wrapper">
+        <div class="hero-text">
+            <h1 id="heroTitle">MOHOMOZO</h1>
+            <p id="heroSubtitle">Experimental Multimedia Artist</p>
+        </div>
+    </div>
 </header>
 
-<!-- Navigation -->
-<nav class="panel-menu">
-  <a onclick="showPanel('home')">Home</a>
-  <a onclick="showPanel('about')">About</a>
-  <a onclick="showPanel('portfolio')">Portfolio</a>
-  <a onclick="showPanel('work')">Work In Progress</a>
+<nav class="main-nav">
+    <div class="nav-links">
+        <a onclick="showPanel('home')" class="nav-item">Home</a>
+        <a onclick="showPanel('about')" class="nav-item">About</a>
+        <a onclick="showPanel('portfolio')" class="nav-item">Portfolio</a>
+        <a onclick="showPanel('work')" class="nav-item">W.I.P</a>
+    </div>
 </nav>
 
 <main id="content">
-
-  <!-- Home -->
-  <section id="home" class="panel active">
-    <h1>Mohammad Mozafari</h1>
-    <p>Experimental Multimedia Artist — exploring animation, illustration, video, and conceptual work across hybrid media.</p>
-  </section>
-
-  <!-- About -->
-  <section id="about" class="panel">
-    <h1>About Me</h1>
-    <p>Mohammad Mozafari is an experimental multimedia artist whose practice spans animation, theater-based video production, painting, illustration, sculpture, and conceptual video art. His work explores emotional states, subconscious narratives, and the tension between personal identity and collective experience.</p>
-  </section>
-
-  <!-- Portfolio -->
-  <section id="portfolio" class="panel">
-    <h1>Portfolio</h1>
-
-    <!-- Submenu / Four cards -->
-    <div class="portfolio-menu">
-      <button onclick="showPortfolio('painting')">Painting</button>
-      <button onclick="showPortfolio('illustration')">Illustration</button>
-      <button onclick="showPortfolio('video')">Video</button>
-      <button onclick="showPortfolio('animation')">Animation</button>
-    </div>
-
-    <div class="portfolio-container">
-      <!-- Painting -->
-      <div class="portfolio-section" id="painting">
-        <div class="project-card overlay">
-          <img src="images/placeholder.png" alt="Painting 1">
-          <div class="overlay-title">Painting</div>
+    <section id="home" class="panel active">
+        <div class="reveal-text">
+            <h2 class="display-name">Mohammad Mozafari</h2>
+            <p class="bio-intro">Exploring the intersection of animation, video, and conceptual art.</p>
         </div>
-        <div class="project-card overlay">
-          <img src="images/placeholder.png" alt="Painting 2">
-          <div class="overlay-title">Painting</div>
+    </section>
+
+    <section id="about" class="panel">
+        <div class="about-grid">
+            <div class="about-text">
+                <h2>About Me</h2>
+                <p>Mohammad Mozafari is an experimental multimedia artist whose practice spans animation, theater-based video production, painting, and sculpture. His work explores emotional states and the tension between identity and collective experience.</p>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <!-- Illustration -->
-      <div class="portfolio-section" id="illustration" style="display:none;">
-        <div class="project-card overlay">
-          <img src="images/placeholder.png" alt="Illustration 1">
-          <div class="overlay-title">Illustration</div>
+    <section id="portfolio" class="panel">
+        <div class="portfolio-header">
+            <h2>Artworks</h2>
+            <div class="portfolio-menu">
+                <button onclick="showPortfolio('painting')">Painting</button>
+                <button onclick="showPortfolio('illustration')">Illustration</button>
+                <button onclick="showPortfolio('video')">Video</button>
+                <button onclick="showPortfolio('animation')">Animation</button>
+            </div>
         </div>
-      </div>
 
-      <!-- Video -->
-      <div class="portfolio-section" id="video" style="display:none;">
-        <div class="project-card overlay">
-          <img src="images/placeholder.png" alt="Video 1">
-          <div class="overlay-title">Video</div>
+        <div class="portfolio-container">
+            <div class="portfolio-section" id="painting">
+                <div class="project-card" onclick="openLightbox(this)"><img src="images/placeholder.png"><span>Painting 01</span></div>
+                <div class="project-card" onclick="openLightbox(this)"><img src="images/placeholder.png"><span>Painting 02</span></div>
+            </div>
+            <div class="portfolio-section" id="illustration" style="display:none;">
+                <div class="project-card" onclick="openLightbox(this)"><img src="images/placeholder.png"><span>Illustration 01</span></div>
+            </div>
+            <div class="portfolio-section" id="video" style="display:none;">
+                <div class="project-card"><img src="images/placeholder.png"><span>Video Art</span></div>
+            </div>
+            <div class="portfolio-section" id="animation" style="display:none;">
+                <div class="project-card"><img src="images/placeholder.png"><span>Motion Work</span></div>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <!-- Animation -->
-      <div class="portfolio-section" id="animation" style="display:none;">
-        <div class="project-card overlay">
-          <img src="images/placeholder.png" alt="Animation 1">
-          <div class="overlay-title">Animation</div>
+    <section id="work" class="panel">
+        <h2>Ongoing Projects</h2>
+        <div class="grid">
+            <div class="project-card wip-card">
+                <img src="images/placeholder.png">
+                <div class="wip-info">
+                    <h3>Project Alpha</h3>
+                    <p>Experimental Short Film</p>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Work In Progress -->
-  <section id="work" class="panel">
-    <h1>Ongoing Projects</h1>
-    <div class="grid">
-      <div class="project-card">
-        <img src="images/placeholder.png" alt="Project A">
-        <h3>Project A</h3>
-        <p>Demo video / Pitch deck placeholder</p>
-      </div>
-      <div class="project-card">
-        <img src="images/placeholder.png" alt="Project B">
-        <h3>Project B</h3>
-        <p>Demo video / Pitch deck placeholder</p>
-      </div>
-    </div>
-  </section>
-
+    </section>
 </main>
 
-<!-- JS for SPA and Portfolio -->
-<script>
-function showPanel(id){
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
-
-  const heroVideo = document.getElementById('heroVideo');
-  const heroContent = document.getElementById('heroContent');
-  const heroTitle = document.getElementById('heroTitle');
-  const heroSubtitle = document.getElementById('heroSubtitle');
-  const heroImage = document.getElementById('heroImage');
-
-  if(id === 'portfolio'){
-    heroVideo.style.display='none';
-    heroContent.style.display='block';
-    heroTitle.innerText = 'Portfolio';
-    heroSubtitle.innerText = 'Explore artworks by category';
-    heroImage.src = 'images/placeholder.png';
-  } else if(id === 'work'){
-    heroVideo.style.display='none';
-    heroContent.style.display='block';
-    heroTitle.innerText = 'Work In Progress';
-    heroSubtitle.innerText = 'Ongoing projects, pitch deck and demos';
-    heroImage.src = 'images/placeholder.png'; // جای ویدیو یا دمو
-  } else {
-    heroVideo.style.display='block';
-    heroContent.style.display='none';
-  }
-}
-
-function showPortfolio(id){
-  document.querySelectorAll('.portfolio-section').forEach(s=>s.style.display='none');
-  const section = document.getElementById(id);
-  section.style.display='flex';
-
-  // reset animation
-  section.querySelectorAll('.project-card').forEach(card=>{
-    card.style.animation='none';
-    card.offsetHeight; // trigger reflow
-    card.style.animation='';
-  });
-}
-</script>
-
+<script src="JS/main.js"></script>
 </body>
 </html>
+
+
