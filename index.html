@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohammad Mozafari | Portfolio</title>
+    <title>Mohammad Mozafari | Multimedia Artist</title>
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="CSS/style.css">
 </head>
@@ -16,10 +16,11 @@
             <div id="lightbox-media-container"></div>
             <div class="lightbox-info">
                 <h3 id="info-title">Title</h3>
-                <p><strong>Dimensions:</strong> <span id="info-dims"></span></p>
-                <p><strong>Material:</strong> <span id="info-material"></span></p>
-                <hr>
-                <p id="info-concept"></p>
+                <div class="info-meta">
+                    <span><strong>DIM:</strong> <span id="info-dims"></span></span>
+                    <span><strong>MAT:</strong> <span id="info-material"></span></span>
+                </div>
+                <div id="info-concept"></div>
             </div>
         </div>
     </div>
@@ -65,7 +66,7 @@
     <section id="portfolio" class="panel">
         <div class="portfolio-header">
             <div class="portfolio-menu">
-                <button onclick="filterPortfolio('all')">All</button>
+                <button onclick="filterPortfolio('all')" class="active">All</button>
                 <button onclick="filterPortfolio('painting')">Painting</button>
                 <button onclick="filterPortfolio('illustration')">Illustration</button>
                 <button onclick="filterPortfolio('video')">Video</button>
