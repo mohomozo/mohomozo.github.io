@@ -1,78 +1,43 @@
-:root {
-    --accent: #00f2ff;
-    --bg: #050505;
-    --card-bg: rgba(255, 255, 255, 0.05);
-    --text-main: #ffffff;
-    --transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+.lightbox-content {
+    background: #111;
+    width: 90%;
+    max-width: 1100px;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
 }
 
-body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text-main);
-    overflow-x: hidden;
+.lightbox-body {
+    display: flex;
+    flex-direction: row; /* در موبایل باید column شود */
 }
 
-/* === Lightbox Style === */
-.lightbox {
-    display: none;
-    position: fixed;
-    z-index: 2000;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(10px);
-    justify-content: center;
+#lightbox-media-container {
+    flex: 2;
+    background: #000;
+    display: flex;
     align-items: center;
+    justify-content: center;
 }
 
-.lightbox img {
-    max-width: 90%;
-    max-height: 80%;
-    border-radius: 5px;
-    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+#lightbox-media-container img, #lightbox-media-container iframe {
+    width: 100%;
+    height: auto;
+    max-height: 80vh;
 }
 
-.close-btn {
-    position: absolute;
-    top: 20px; right: 30px;
-    font-size: 40px; color: white; cursor: pointer;
+.lightbox-info {
+    flex: 1;
+    padding: 30px;
+    border-left: 1px solid rgba(255,255,255,0.1);
+    background: #111;
 }
 
-/* === Hero & Layout === */
-.hero { position: relative; height: 60vh; overflow: hidden; }
-.video-container { width: 100%; height: 100%; }
-.video-container video { width: 100%; height: 100%; object-fit: cover; transition: filter 1s ease; }
-.video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, transparent, var(--bg)); }
-.hero-text { position: absolute; bottom: 10%; left: 5%; z-index: 10; pointer-events: none; }
-.hero-text h1 { font-family: 'Syncopate', sans-serif; font-size: clamp(2rem, 8vw, 5rem); margin: 0; letter-spacing: -2px; }
+.lightbox-info h3 { font-family: 'Syncopate'; color: var(--accent); margin-top: 0; }
+.lightbox-info p { font-size: 0.9rem; line-height: 1.6; color: #ccc; }
+.lightbox-info hr { border: 0; border-top: 1px solid #333; margin: 20px 0; }
 
-/* === Navigation === */
-.main-nav { position: sticky; top: 0; z-index: 1000; background: rgba(5, 5, 5, 0.8); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding: 1.2rem 0; }
-.nav-links { display: flex; justify-content: center; gap: 2.5rem; }
-.nav-item { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; opacity: 0.5; transition: var(--transition); }
-.nav-item:hover { opacity: 1; color: var(--accent); }
-
-/* === Panel System === */
-main { padding: 4rem 8%; }
-.panel { display: none; animation: fadeIn 0.8s ease forwards; }
-.panel.active { display: block; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-
-/* === Portfolio Grid === */
-.portfolio-menu { margin: 2.5rem 0; display: flex; flex-wrap: wrap; gap: 10px; }
-.portfolio-menu button { background: transparent; border: 1px solid rgba(255, 255, 255, 0.1); color: white; padding: 10px 25px; border-radius: 30px; cursor: pointer; font-family: 'Inter'; font-weight: 600; transition: var(--transition); }
-.portfolio-menu button:hover { background: var(--accent); color: black; border-color: var(--accent); }
-
-.portfolio-section { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
-.project-card { position: relative; aspect-ratio: 1/1; background: var(--card-bg); border-radius: 15px; overflow: hidden; cursor: pointer; border: 1px solid rgba(255, 255, 255, 0.05); }
-.project-card img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); filter: grayscale(0.3); }
-.project-card:hover img { transform: scale(1.08); filter: grayscale(0); }
-.project-card span { position: absolute; bottom: 15px; left: 15px; font-size: 0.8rem; background: rgba(0,0,0,0.8); padding: 6px 15px; border-radius: 20px; opacity: 0; transition: var(--transition); }
-.project-card:hover span { opacity: 1; }
-
-@media (max-width: 768px) {
-    .nav-links { gap: 1.2rem; }
-    .hero-text h1 { font-size: 2.5rem; }
-    main { padding: 2rem 5%; }
+@media (max-width: 900px) {
+    .lightbox-body { flex-direction: column; }
+    .lightbox-info { border-left: none; border-top: 1px solid #333; }
 }
