@@ -1,105 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohammad Mozafari | Multimedia Artist</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="CSS/style.css">
-</head>
-<body>
-
-<div id="lightbox" class="lightbox" onclick="closeLightbox()">
-    <span class="close-btn">&times;</span>
-    <img id="lightbox-img" src="" alt="">
-</div>
-
-<header class="hero">
-    <div class="video-container">
-        <video id="heroVideo" autoplay muted loop playsinline webkit-playsinline>
-            <source src="assets/loop.mp4" type="video/mp4">
-        </video>
-        <div class="video-overlay"></div>
-    </div>
-    
-    <div id="heroContent" class="hero-content-wrapper">
-        <div class="hero-text">
-            <h1 id="heroTitle">MOHOMOZO</h1>
-            <p id="heroSubtitle">Experimental Multimedia Artist</p>
+<section id="portfolio" class="panel">
+    <div class="portfolio-header">
+        <h2>Artworks</h2>
+        <div class="portfolio-menu">
+            <button onclick="filterPortfolio('all')">All</button>
+            <button onclick="filterPortfolio('painting')">Painting</button>
+            <button onclick="filterPortfolio('illustration')">Illustration</button>
+            <button onclick="filterPortfolio('video')">Video</button>
+            <button onclick="filterPortfolio('animation')">Animation</button>
         </div>
     </div>
-</header>
+    <div class="portfolio-container" id="portfolio-grid"></div>
+</section>
 
-<nav class="main-nav">
-    <div class="nav-links">
-        <a onclick="showPanel('home')" class="nav-item">Home</a>
-        <a onclick="showPanel('about')" class="nav-item">About</a>
-        <a onclick="showPanel('portfolio')" class="nav-item">Portfolio</a>
-        <a onclick="showPanel('work')" class="nav-item">W.I.P</a>
-    </div>
-</nav>
-
-<main id="content">
-    <section id="home" class="panel active">
-        <div class="reveal-text">
-            <h2 class="display-name">Mohammad Mozafari</h2>
-            <p class="bio-intro">Exploring the intersection of animation, video, and conceptual art.</p>
-        </div>
-    </section>
-
-    <section id="about" class="panel">
-        <div class="about-grid">
-            <div class="about-text">
-                <h2>About Me</h2>
-                <p>Mohammad Mozafari is an experimental multimedia artist whose practice spans animation, theater-based video production, painting, and sculpture. His work explores emotional states and the tension between identity and collective experience.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="portfolio" class="panel">
-        <div class="portfolio-header">
-            <h2>Artworks</h2>
-            <div class="portfolio-menu">
-                <button onclick="showPortfolio('painting')">Painting</button>
-                <button onclick="showPortfolio('illustration')">Illustration</button>
-                <button onclick="showPortfolio('video')">Video</button>
-                <button onclick="showPortfolio('animation')">Animation</button>
-            </div>
-        </div>
-
-        <div class="portfolio-container">
-            <div class="portfolio-section" id="painting">
-                <div class="project-card" onclick="openLightbox(this)"><img src="images/placeholder.png"><span>Painting 01</span></div>
-                <div class="project-card" onclick="openLightbox(this)"><img src="images/placeholder.png"><span>Painting 02</span></div>
-            </div>
-            <div class="portfolio-section" id="illustration" style="display:none;">
-                <div class="project-card" onclick="openLightbox(this)"><img src="images/placeholder.png"><span>Illustration 01</span></div>
-            </div>
-            <div class="portfolio-section" id="video" style="display:none;">
-                <div class="project-card"><img src="images/placeholder.png"><span>Video Art</span></div>
-            </div>
-            <div class="portfolio-section" id="animation" style="display:none;">
-                <div class="project-card"><img src="images/placeholder.png"><span>Motion Work</span></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="work" class="panel">
-        <h2>Ongoing Projects</h2>
-        <div class="grid">
-            <div class="project-card wip-card">
-                <img src="images/placeholder.png">
-                <div class="wip-info">
-                    <h3>Project Alpha</h3>
-                    <p>Experimental Short Film</p>
+<div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+    <div class="lightbox-content" onclick="event.stopPropagation()">
+        <span class="close-btn" onclick="closeLightbox()">&times;</span>
+        <div class="lightbox-body">
+            <div id="lightbox-media-container">
                 </div>
+            <div class="lightbox-info">
+                <h3 id="info-title">نام اثر</h3>
+                <p><strong>Dimensions:</strong> <span id="info-dims">-</span></p>
+                <p><strong>Material:</strong> <span id="info-material">-</span></p>
+                <hr>
+                <p id="info-concept">توضیحات کانسپت و ایده در اینجا قرار می‌گیرد.</p>
             </div>
         </div>
-    </section>
-</main>
-
+    </div>
+</div>
+<script src="JS/data.js"></script>
 <script src="JS/main.js"></script>
-</body>
-</html>
-
-
