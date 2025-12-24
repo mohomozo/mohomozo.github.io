@@ -1,3 +1,4 @@
+/* --- تنظیمات پایه و متغیرها --- */
 :root {
     --accent: #00f2ff;
     --bg: #050505;
@@ -10,7 +11,7 @@ body {
     font-family: 'Inter', sans-serif; overflow-x: hidden;
 }
 
-/* Hero & Nav */
+/* --- بخش هیرو (Hero Section) --- */
 .hero { position: relative; height: 50vh; overflow: hidden; }
 .video-container { width: 100%; height: 100%; position: absolute; }
 .video-container video { width: 100%; height: 100%; object-fit: cover; transition: filter 1.2s; }
@@ -19,17 +20,19 @@ body {
     background: linear-gradient(to bottom, transparent, var(--bg)); 
 }
 .hero-text { position: absolute; bottom: 10%; left: 5%; z-index: 10; font-family: 'Syncopate'; }
+.hero-text h1 { font-size: 3.5rem; margin: 0; letter-spacing: 5px; }
 
+/* --- ناوبری (Navigation) --- */
 .main-nav { 
     position: sticky; top: 0; z-index: 100; 
     background: rgba(5,5,5,0.7); backdrop-filter: blur(25px);
     padding: 1.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 .nav-links { display: flex; justify-content: center; gap: 2rem; }
-.nav-item { cursor: pointer; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px; opacity: 0.5; transition: 0.3s; }
+.nav-item { cursor: pointer; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px; opacity: 0.5; transition: 0.3s; color: #fff; text-decoration: none; }
 .nav-item:hover { opacity: 1; color: var(--accent); }
 
-/* Portfolio Menu Buttons */
+/* --- دکمه‌های فیلتر (Portfolio Menu) --- */
 .portfolio-menu { display: flex; justify-content: center; gap: 12px; margin-bottom: 40px; flex-wrap: wrap; }
 .portfolio-menu button {
     background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
@@ -41,39 +44,61 @@ body {
     box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
 }
 
-/* Project Cards */
-.portfolio-container, .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
+/* --- گرید پورتفولیو و کارت‌ها --- */
+main { padding: 3rem 5%; }
+.portfolio-container, .grid { 
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    gap: 30px; margin-top: 2rem;
+}
 .project-card { 
     position: relative; aspect-ratio: 1/1; border-radius: 20px; overflow: hidden; 
     cursor: pointer; border: 1px solid rgba(255, 255, 255, 0.08); transition: var(--transition);
 }
 .project-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
-.project-card:hover { transform: translateY(-10px); border-color: var(--accent); box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
+.project-card:hover { transform: translateY(-10px); border-color: var(--accent); }
 .project-card:hover img { transform: scale(1.08); }
-.project-card div.card-overlay { 
+.card-overlay { 
     position: absolute; bottom: 0; width: 100%; padding: 25px; 
-    background: linear-gradient(transparent, rgba(0,0,0,0.9)); font-size: 0.85rem; font-weight: 600;
+    background: linear-gradient(transparent, rgba(0,0,0,0.9)); font-size: 0.85rem; 
 }
 
-/* Lightbox (Glassmorphism) */
-.lightbox { 
-    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-    background: rgba(0,0,0,0.6); backdrop-filter: blur(35px); z-index: 2000; overflow-y: auto; padding: 40px 0;
+/* --- لایت‌باکس شیشه‌ای و معلق (نسخه نهایی) --- */
+.lightbox {
+    display: none; position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(30px);
+    z-index: 9999; overflow-y: auto; padding: 5vh 0;
 }
 .lightbox-content { 
-    width: 90%; max-width: 950px; margin: 0 auto; background: rgba(20, 20, 20, 0.4); 
-    border: 1px solid rgba(255,255,255,0.1); border-radius: 30px; box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+    width: 90%; max-width: 950px; margin: 0 auto; 
+    background: transparent; border: none; 
 }
-.lightbox-body { display: flex; flex-direction: column; }
-#lightbox-media-container { width: 100%; background: #000; line-height: 0; }
-#lightbox-media-container img { width: 100%; height: auto; display: block; }
-.lightbox-info { padding: 50px; }
+.floating-media {
+    width: 100%; margin-bottom: 40px; 
+    border-radius: 15px; box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    animation: slideUp 0.8s ease; display: block;
+}
+.lightbox-info { color: #fff; padding: 40px 0; }
 .lightbox-info h3 { font-family: 'Syncopate'; font-size: 2rem; color: var(--accent); margin: 0 0 20px 0; }
-.info-meta { display: flex; gap: 40px; margin-bottom: 30px; color: var(--accent); font-size: 0.8rem; letter-spacing: 1px; }
+.info-meta { display: flex; gap: 40px; margin-bottom: 30px; color: var(--accent); font-size: 0.8rem; text-transform: uppercase; }
 #info-concept { font-size: 1.1rem; line-height: 1.9; color: rgba(255,255,255,0.7); text-align: justify; }
-.close-btn { position: fixed; top: 30px; right: 40px; font-size: 2.5rem; cursor: pointer; z-index: 2100; color: #fff; transition: 0.3s; }
-.close-btn:hover { color: var(--accent); transform: rotate(90deg); }
 
-.panel { display: none; animation: fadeIn 0.8s ease forwards; padding-bottom: 100px; }
+.close-btn { 
+    position: fixed; top: 30px; right: 40px; font-size: 3rem; 
+    cursor: pointer; z-index: 10000; color: rgba(255,255,255,0.5); transition: 0.3s; 
+}
+.close-btn:hover { color: var(--accent); transform: rotate(90deg) scale(1.2); }
+
+/* --- سیستم پنل‌ها (SPA Panels) --- */
+.panel { display: none; animation: fadeIn 0.8s ease forwards; }
 .panel.active { display: block; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+
+/* --- واکنش‌گرایی برای موبایل --- */
+@media (max-width: 768px) {
+    .hero-text h1 { font-size: 2rem; }
+    .nav-links { gap: 1rem; }
+    .info-meta { flex-direction: column; gap: 10px; }
+    .close-btn { top: 20px; right: 20px; font-size: 2rem; }
+}
