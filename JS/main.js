@@ -1,5 +1,5 @@
-// تابع رندر کردن کارت‌ها
-function renderPortfolio() {
+// تابع لود کردن کارت‌ها
+function renderPortfolioContent() {
     const grid = document.getElementById('portfolio-grid');
     if (!grid || !window.myProjects) return;
 
@@ -11,7 +11,7 @@ function renderPortfolio() {
             <img src="${project.image}" alt="${project.title}">
             <div class="card-overlay"><span>${project.title}</span></div>
         `;
-        card.onclick = () => openLightbox(project);
+        card.onclick = () => window.openLightbox(project);
         grid.appendChild(card);
     });
 }
@@ -24,10 +24,11 @@ window.showPanel = function(id) {
     const target = document.getElementById(id);
     if (target) {
         target.classList.add('active');
-        if (id === 'portfolio') renderPortfolio();
+        if (id === 'portfolio' || id === 'home') {
+            renderPortfolioContent();
+        }
     }
 
-    // افکت ویدیو هیرو
     const heroVideo = document.getElementById('heroVideo');
     if (heroVideo) {
         heroVideo.style.filter = (id === 'home' || !id) ? "blur(0px)" : "blur(20px) brightness(0.4)";
@@ -43,25 +44,20 @@ window.openLightbox = function(project) {
 
     container.innerHTML = '';
 
-    // ویدیو
     if (project.videoUrl) {
-        const videoId = project.videoUrl.split('v=')[1] || project.videoUrl.split('/').pop();
         container.innerHTML += `
             <div class="floating-media" style="padding:56.25% 0 0 0;position:relative;">
-                <iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" 
-                style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allowfullscreen></iframe>
+                <iframe src="${project.videoUrl}?autoplay=1" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allowfullscreen></iframe>
             </div>`;
     }
 
-    // متن استیتمنت
-    container.innerHTML += `<div class="lightbox-info"><h3>${project.title}</h3>${project.concept}</div>`;
+    container.innerHTML += `<div class="lightbox-info"><h3>${project.title}</h3><p>${project.concept}</p></div>`;
 
-    // گالری تصاویر
     if (project.gallery) {
         project.gallery.forEach((imgUrl, index) => {
-            container.innerHTML += `<img src="${imgUrl}" class="floating-media">`;
+            container.innerHTML += `<img src="${imgUrl}" class="floating-media" onerror="this.style.display='none'">`;
             if (index === 0 && project.detailsInfo) {
-                container.innerHTML += `<p style="text-align:center; opacity:0.6; margin-bottom:40px;">${project.detailsInfo}</p>`;
+                container.innerHTML += `<p style="text-align:center; opacity:0.6; margin-bottom:40px; color:#fff;">${project.detailsInfo}</p>`;
             }
         });
     }
@@ -76,7 +72,8 @@ window.closeLightbox = function() {
 };
 
 // اجرای اولیه
-window.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
+    renderPortfolioContent();
     const hash = window.location.hash.replace('#', '');
     window.showPanel(hash || 'home');
 });
