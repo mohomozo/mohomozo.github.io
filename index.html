@@ -9,20 +9,11 @@
 </head>
 <body>
 
+<!-- LIGHTBOX -->
 <div id="lightbox" class="lightbox" onclick="closeLightbox()">
     <div class="lightbox-content" onclick="event.stopPropagation()">
         <span class="close-btn" onclick="closeLightbox()">&times;</span>
-        <div class="lightbox-body">
-            <div id="lightbox-media-container"></div>
-            <div class="lightbox-info">
-                <h3 id="info-title">Title</h3>
-                <div class="info-meta">
-                    <span><strong>DIM:</strong> <span id="info-dims"></span></span>
-                    <span><strong>MAT:</strong> <span id="info-material"></span></span>
-                </div>
-                <div id="info-concept"></div>
-            </div>
-        </div>
+        <div id="lightbox-media-container"></div>
     </div>
 </div>
 
@@ -69,7 +60,6 @@
                 <button onclick="filterPortfolio('all')" class="active">All</button>
                 <button onclick="filterPortfolio('painting')">Painting</button>
                 <button onclick="filterPortfolio('illustration')">Illustration</button>
-                <button onclick="filterPortfolio('video')">Video</button>
                 <button onclick="filterPortfolio('animation')">Animation</button>
             </div>
         </div>
@@ -86,14 +76,3 @@
 <script src="JS/main.js"></script>
 </body>
 </html>
-<script src="JS/data.js"></script>
-<script src="JS/main.js"></script>
-<div id="lightbox" class="lightbox">
-        <span class="close-btn" onclick="closeLightbox()">&times;</span>
-        <div class="lightbox-content" id="lightbox-media-container">
-            </div>
-    </div>
-
-    <script src="JS/data.js"></script> <script src="JS/main.js"></script> </body>
-</html>
-
