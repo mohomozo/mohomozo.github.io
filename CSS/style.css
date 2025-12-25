@@ -1,4 +1,3 @@
-/* --- تنظیمات پایه و متغیرها --- */
 :root {
     --accent: #00f2ff;
     --bg: #050505;
@@ -7,98 +6,242 @@
 }
 
 body {
-    margin: 0; background: var(--bg); color: #fff;
-    font-family: 'Inter', sans-serif; overflow-x: hidden;
+    margin: 0;
+    background: var(--bg);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
 }
 
-/* --- بخش هیرو (Hero Section) --- */
-.hero { position: relative; height: 50vh; overflow: hidden; }
-.video-container { width: 100%; height: 100%; position: absolute; }
-.video-container video { width: 100%; height: 100%; object-fit: cover; transition: filter 1.2s; }
-.video-overlay { 
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-    background: linear-gradient(to bottom, transparent, var(--bg)); 
+/* HERO */
+.hero {
+    position: relative;
+    height: 50vh;
+    overflow: hidden;
 }
-.hero-text { position: absolute; bottom: 10%; left: 5%; z-index: 10; font-family: 'Syncopate'; }
-.hero-text h1 { font-size: 3.5rem; margin: 0; letter-spacing: 5px; }
-
-/* --- ناوبری (Navigation) --- */
-.main-nav { 
-    position: sticky; top: 0; z-index: 100; 
-    background: rgba(5,5,5,0.7); backdrop-filter: blur(25px);
-    padding: 1.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+.video-container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
 }
-.nav-links { display: flex; justify-content: center; gap: 2rem; }
-.nav-item { cursor: pointer; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px; opacity: 0.5; transition: 0.3s; color: #fff; text-decoration: none; }
-.nav-item:hover { opacity: 1; color: var(--accent); }
+.video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: filter 1.2s;
+}
+.video-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(to bottom, transparent, var(--bg));
+}
+.hero-text {
+    position: absolute;
+    bottom: 10%;
+    left: 5%;
+    z-index: 10;
+    font-family: 'Syncopate';
+}
+.hero-text h1 {
+    font-size: 3.5rem;
+    margin: 0;
+    letter-spacing: 5px;
+}
 
-/* --- دکمه‌های فیلتر (Portfolio Menu) --- */
-.portfolio-menu { display: flex; justify-content: center; gap: 12px; margin-bottom: 40px; flex-wrap: wrap; }
+/* NAV */
+.main-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(5,5,5,0.7);
+    backdrop-filter: blur(25px);
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.nav-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+.nav-item {
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    opacity: 0.5;
+    transition: 0.3s;
+    color: #fff;
+    text-decoration: none;
+}
+.nav-item:hover {
+    opacity: 1;
+    color: var(--accent);
+}
+
+/* MAIN LAYOUT */
+main {
+    padding: 3rem 5%;
+}
+.panel {
+    display: none;
+    animation: fadeIn 0.8s ease forwards;
+}
+.panel.active {
+    display: block;
+}
+
+/* PORTFOLIO GRID */
+.portfolio-menu {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
 .portfolio-menu button {
-    background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #fff; padding: 10px 22px; border-radius: 50px; cursor: pointer;
-    font-weight: 600; font-size: 0.8rem; transition: var(--transition);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 10px 22px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.8rem;
+    transition: var(--transition);
 }
-.portfolio-menu button:hover, .portfolio-menu button.active {
-    background: rgba(0, 242, 255, 0.15); border-color: var(--accent); color: var(--accent);
+.portfolio-menu button:hover,
+.portfolio-menu button.active {
+    background: rgba(0, 242, 255, 0.15);
+    border-color: var(--accent);
+    color: var(--accent);
     box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
 }
 
-/* --- گرید پورتفولیو و کارت‌ها --- */
-main { padding: 3rem 5%; }
-.portfolio-container, .grid { 
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-    gap: 30px; margin-top: 2rem;
+.portfolio-container,
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 2rem;
 }
-.project-card { 
-    position: relative; aspect-ratio: 1/1; border-radius: 20px; overflow: hidden; 
-    cursor: pointer; border: 1px solid rgba(255, 255, 255, 0.08); transition: var(--transition);
+.project-card {
+    position: relative;
+    aspect-ratio: 1/1;
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: var(--transition);
+    background: #111;
 }
-.project-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
-.project-card:hover { transform: translateY(-10px); border-color: var(--accent); }
-.project-card:hover img { transform: scale(1.08); }
-.card-overlay { 
-    position: absolute; bottom: 0; width: 100%; padding: 25px; 
-    background: linear-gradient(transparent, rgba(0,0,0,0.9)); font-size: 0.85rem; 
+.project-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+.project-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--accent);
+}
+.project-card:hover img {
+    transform: scale(1.08);
+}
+.card-overlay {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 25px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+    font-size: 0.85rem;
+}
+.card-overlay span {
+    font-weight: 600;
+    font-size: 1rem;
+}
+.card-overlay p {
+    margin: 5px 0 0 0;
+    font-size: 0.7rem;
+    opacity: 0.7;
 }
 
-/* --- لایت‌باکس شیشه‌ای و معلق (نسخه نهایی) --- */
+/* LIGHTBOX (FULL SCREEN, SCROLLABLE INSIDE) */
 .lightbox {
-    display: none; position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(30px);
-    z-index: 9999; overflow-y: auto; padding: 5vh 0;
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(30px);
+    z-index: 9999;
+    overflow-y: auto;
+    padding: 5vh 0;
 }
-.lightbox-content { 
-    width: 90%; max-width: 950px; margin: 0 auto; 
-    background: transparent; border: none; 
+.lightbox-content {
+    width: 90%;
+    max-width: 950px;
+    margin: 0 auto;
+    background: transparent;
+    border: none;
+}
+#lightbox-media-container {
+    padding-top: 40px;
 }
 .floating-media {
-    width: 100%; margin-bottom: 40px; 
-    border-radius: 15px; box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-    animation: slideUp 0.8s ease; display: block;
+    width: 100%;
+    margin-bottom: 40px;
+    border-radius: 15px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    display: block;
 }
-.lightbox-info { color: #fff; padding: 40px 0; }
-.lightbox-info h3 { font-family: 'Syncopate'; font-size: 2rem; color: var(--accent); margin: 0 0 20px 0; }
-.info-meta { display: flex; gap: 40px; margin-bottom: 30px; color: var(--accent); font-size: 0.8rem; text-transform: uppercase; }
-#info-concept { font-size: 1.1rem; line-height: 1.9; color: rgba(255,255,255,0.7); text-align: justify; }
-
-.close-btn { 
-    position: fixed; top: 30px; right: 40px; font-size: 3rem; 
-    cursor: pointer; z-index: 10000; color: rgba(255,255,255,0.5); transition: 0.3s; 
+.lightbox-info {
+    color: #fff;
+    padding: 20px 0 60px 0;
 }
-.close-btn:hover { color: var(--accent); transform: rotate(90deg) scale(1.2); }
+.lightbox-info h3 {
+    font-family: 'Syncopate';
+    font-size: 2rem;
+    color: var(--accent);
+    margin: 0 0 20px 0;
+}
+.lightbox-info p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.8);
+}
+.close-btn {
+    position: fixed;
+    top: 30px;
+    right: 40px;
+    font-size: 3rem;
+    cursor: pointer;
+    z-index: 10000;
+    color: rgba(255,255,255,0.5);
+    transition: 0.3s;
+}
+.close-btn:hover {
+    color: var(--accent);
+    transform: rotate(90deg) scale(1.2);
+}
 
-/* --- سیستم پنل‌ها (SPA Panels) --- */
-.panel { display: none; animation: fadeIn 0.8s ease forwards; }
-.panel.active { display: block; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+/* ANIMATIONS */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
-/* --- واکنش‌گرایی برای موبایل --- */
+/* RESPONSIVE */
 @media (max-width: 768px) {
     .hero-text h1 { font-size: 2rem; }
     .nav-links { gap: 1rem; }
-    .info-meta { flex-direction: column; gap: 10px; }
-    .close-btn { top: 20px; right: 20px; font-size: 2rem; }
+    .close-btn {
+        top: 20px;
+        right: 20px;
+        font-size: 2rem;
+    }
 }
