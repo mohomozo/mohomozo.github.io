@@ -1,48 +1,32 @@
-console.log("MAIN JS RUNNING");
+console.log("FINAL JS LOADED");
 
-/* ---------- PANEL SWITCH ---------- */
-
-const navButtons = document.querySelectorAll('.main-nav button');
+const buttons = document.querySelectorAll('.main-nav button');
 const panels = document.querySelectorAll('.panel');
-
-navButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const target = btn.dataset.panel;
-
-    panels.forEach(p => p.classList.remove('active'));
-    document.getElementById(target).classList.add('active');
-  });
-});
-
-/* ---------- HERO VIDEO DRIFT ---------- */
-
+const body = document.body;
 const heroVideo = document.getElementById('heroVideo');
-let t = 0;
 
-setInterval(() => {
-  t += 0.02;
-  heroVideo.style.transform =
-    `scale(${1.03 + Math.sin(t) * 0.01}) translate(${Math.sin(t)*6}px, ${Math.cos(t)*6}px)`;
-}, 120);
+function activatePanel(id) {
+  panels.forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
 
-/* ---------- PORTFOLIO FILTER ---------- */
+  body.className = '';
+  body.classList.add(`state-${id}`);
 
-const filterButtons = document.querySelectorAll('.portfolio-menu button');
-const items = document.querySelectorAll('.portfolio-item');
+  window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+}
 
-filterButtons.forEach(btn => {
+buttons.forEach(btn => {
   btn.addEventListener('click', () => {
-    filterButtons.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-
-    const type = btn.dataset.filter;
-
-    items.forEach(item => {
-      if (type === 'all' || item.dataset.type === type) {
-        item.style.display = 'block';
-      } else {
-        item.style.display = 'none';
-      }
-    });
+    activatePanel(btn.dataset.panel);
   });
 });
+
+/* UNSTABLE HERO MOTION */
+let t = 0;
+setInterval(() => {
+  t += 0.04;
+  heroVideo.style.transform = `
+    scale(${1.05 + Math.sin(t) * 0.02})
+    translate(${Math.sin(t) * 10}px, ${Math.cos(t) * 10}px)
+  `;
+}, 120);
