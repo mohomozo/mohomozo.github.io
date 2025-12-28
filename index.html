@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mohammad Mozafari | Multimedia Artist</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="CSS/style.css">
@@ -11,22 +11,17 @@
 
 <body class="state-home">
 
-<!-- HERO -->
 <header class="hero">
-  <div class="video-container">
-    <video id="heroVideo" autoplay muted loop playsinline>
-      <source src="assets/loop.mp4" type="video/mp4">
-    </video>
-    <div class="video-overlay"></div>
-  </div>
-
+  <video id="heroVideo" autoplay muted loop playsinline>
+    <source src="assets/loop.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
   <div class="hero-text">
     <h1>MOHOMOZO</h1>
     <p>Experimental Multimedia Artist</p>
   </div>
 </header>
 
-<!-- NAV -->
 <nav class="main-nav">
   <button data-panel="home">Home</button>
   <button data-panel="about">About</button>
@@ -34,34 +29,34 @@
   <button data-panel="work">W.I.P</button>
 </nav>
 
-<!-- PANELS -->
 <main>
 
-  <section id="home" class="panel active">
-    <h2>Mohammad Mozafari</h2>
-    <p>Exploring animation, video, and conceptual art.</p>
-  </section>
+<section id="home" class="panel active">
+  <h2>Mohammad Mozafari</h2>
+  <p>Animation, image, deformation, process.</p>
+</section>
 
-  <section id="about" class="panel">
-    <h2>About</h2>
-    <p>
-      Mohammad Mozafari is an experimental multimedia artist working across
-      animation, theater-based video, painting, and sculptural thinking.
-    </p>
-  </section>
+<section id="about" class="panel">
+  <h2>About</h2>
+  <p>
+    Mohammad Mozafari is an experimental multimedia artist working across animation,
+    painting, image-based research and process-driven projects.
+  </p>
+</section>
 
-  <section id="portfolio" class="panel">
-    <h2>Portfolio</h2>
-    <p>Selected works in animation, image, and motion experiments.</p>
-  </section>
+<section id="portfolio" class="panel">
+  <h2>Portfolio</h2>
+  <div id="portfolioGrid" class="grid"></div>
+</section>
 
-  <section id="work" class="panel">
-    <h2>Work In Progress</h2>
-    <p>Ongoing research-driven and experimental projects.</p>
-  </section>
+<section id="work" class="panel">
+  <h2>Work In Progress</h2>
+  <div id="wipGrid" class="grid"></div>
+</section>
 
 </main>
 
+<script src="JS/data.js"></script>
 <script src="JS/main.js"></script>
 </body>
 </html>
