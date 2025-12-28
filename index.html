@@ -1,23 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mohammad Mozafari | Multimedia Artist</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="CSS/style.css">
 </head>
-<body>
 
-<!-- LIGHTBOX -->
-<div id="lightbox" class="lightbox">
-  <div class="lightbox-content">
-    <span class="close-btn" id="closeLightbox">&times;</span>
-    <div id="lightbox-media-container"></div>
-  </div>
-</div>
+<body class="state-home">
 
+<!-- HERO -->
 <header class="hero">
   <div class="video-container">
     <video id="heroVideo" autoplay muted loop playsinline>
@@ -32,6 +26,7 @@
   </div>
 </header>
 
+<!-- NAV -->
 <nav class="main-nav">
   <button data-panel="home">Home</button>
   <button data-panel="about">About</button>
@@ -39,54 +34,30 @@
   <button data-panel="work">W.I.P</button>
 </nav>
 
-<main id="content">
+<!-- PANELS -->
+<main>
 
   <section id="home" class="panel active">
     <h2>Mohammad Mozafari</h2>
-    <p>
-      Exploring the intersection of animation, video, conceptual art, and performance-based imagery.
-    </p>
+    <p>Exploring animation, video, and conceptual art.</p>
   </section>
 
   <section id="about" class="panel">
     <h2>About</h2>
     <p>
-      Mohammad Mozafari is an experimental multimedia artist working across animation,
-      theater-based video production, painting, and sculptural forms.
-      His practice focuses on deformation, transformation, and animation as an autonomous entity.
+      Mohammad Mozafari is an experimental multimedia artist working across
+      animation, theater-based video, painting, and sculptural thinking.
     </p>
   </section>
 
   <section id="portfolio" class="panel">
-    <div class="portfolio-menu">
-      <button class="active" data-filter="all">All</button>
-      <button data-filter="painting">Painting</button>
-      <button data-filter="illustration">Illustration</button>
-      <button data-filter="animation">Animation</button>
-    </div>
-
-    <div class="portfolio-container">
-      <!-- نمونه آیتم -->
-      <div class="portfolio-item" data-type="animation">
-        <img src="assets/sample1.jpg" alt="">
-      </div>
-
-      <div class="portfolio-item" data-type="painting">
-        <img src="assets/sample2.jpg" alt="">
-      </div>
-
-      <div class="portfolio-item" data-type="illustration">
-        <img src="assets/sample3.jpg" alt="">
-      </div>
-    </div>
+    <h2>Portfolio</h2>
+    <p>Selected works in animation, image, and motion experiments.</p>
   </section>
 
   <section id="work" class="panel">
-    <h2>Ongoing Projects</h2>
-    <p>
-      Current works in progress focusing on morphing, ritual movement,
-      and non-narrative animation structures.
-    </p>
+    <h2>Work In Progress</h2>
+    <p>Ongoing research-driven and experimental projects.</p>
   </section>
 
 </main>
@@ -94,4 +65,3 @@
 <script src="JS/main.js"></script>
 </body>
 </html>
-<body class="state-home">
