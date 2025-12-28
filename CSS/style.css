@@ -1,122 +1,92 @@
-/* --- تنظیمات کلی و استایل بدنه --- */
-body {
+body, html {
     margin: 0;
     padding: 0;
-    background-color: #050505; /* مشکی تقریباً مطلق */
+    background-color: #000; /* پس‌زمینه مشکی طبق تصویر */
     color: #fff;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
     overflow: hidden;
     height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-/* --- کانتینر اصلی --- */
-#main-container {
+.main-wrapper {
     position: relative;
     width: 100%;
     height: 100vh;
-    max-width: 1400px;
-    background: radial-gradient(circle at center, #1a1a1a 0%, #000 70%);
 }
 
-/* --- لایه گرافیک --- */
-svg {
+/* استایل خطوط آبی */
+.network-svg {
+    position: absolute;
     width: 100%;
     height: 100%;
-    position: absolute;
-    top: 0; left: 0;
     z-index: 1;
-    pointer-events: none;
 }
 
-/* خطوط آبی */
-.connector {
-    stroke: #00aaff;
-    stroke-width: 4;
+.blue-line {
+    stroke: #007bff;
+    stroke-width: 0.8;
     stroke-linecap: round;
-    filter: drop-shadow(0 0 5px #00aaff);
-    opacity: 0.8;
-    transition: all 0.5s ease;
+    filter: drop-shadow(0 0 5px #007bff);
 }
 
-/* نقاط قرمز */
-.node {
-    fill: #ff2a2a;
-    cursor: pointer;
-    pointer-events: auto;
-    filter: drop-shadow(0 0 8px #ff2a2a);
-    transition: all 0.3s ease;
-    transform-box: fill-box;
-    transform-origin: center;
-}
-
-.node:hover {
-    transform: scale(1.3);
-    fill: #ff5555;
-}
-
-.node.active {
-    fill: #fff;
-    filter: drop-shadow(0 0 15px #fff);
-}
-
-/* --- پنل‌های سبز --- */
-.panel {
+/* استایل نقاط قرمز */
+.red-dot {
     position: absolute;
-    border: 3px solid #00ff88;
-    background: rgba(0, 20, 10, 0.85);
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
-    backdrop-filter: blur(8px);
+    width: 15px;
+    height: 15px;
+    background-color: #ff0000;
+    border-radius: 50%;
+    cursor: pointer;
     z-index: 10;
-    opacity: 0;
-    transform: scale(0.9);
-    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: 0 0 15px #ff0000;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.red-dot:hover {
+    transform: scale(1.5);
+    background-color: #fff;
+}
+
+/* موقعیت‌دهی نقاط بر اساس تصویر شما */
+.dot-center { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.dot-1 { top: 70%; left: 25%; }
+.dot-2 { top: 30%; left: 40%; }
+.dot-3 { top: 35%; left: 75%; }
+
+/* گرید خروجی اطلاعات (جایگزین کادرهای سبز) */
+.info-grid-top-left {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 300px;
+    height: 200px;
+    border: 1px solid rgba(0, 255, 0, 0.3); /* سبز ملایم برای هماهنگی با طرح شما */
     display: flex;
-    flex-direction: column;
-    pointer-events: none;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.05);
 }
 
-.panel.visible {
-    opacity: 1;
-    transform: scale(1);
-    pointer-events: auto;
-}
-
-#panel-left {
-    top: 10%; left: 5%;
-    width: 300px; height: 200px;
-}
-
-#panel-right {
-    bottom: 10%; right: 5%;
-    width: 350px; min-height: 150px;
+.info-grid-bottom-right {
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+    width: 350px;
     text-align: right;
+    padding: 20px;
+    border-right: 4px solid #00ff00; /* لبه سبز نئونی */
+    background: rgba(0, 0, 0, 0.8);
 }
 
-.panel h2 {
-    margin: 0 0 10px 0;
-    color: #00ff88;
-    font-size: 1.5rem;
-    text-shadow: 0 0 5px rgba(0,255,136,0.5);
-}
-
-.panel p {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: #e0e0e0;
-}
-
-.panel img {
-    width: 100%; height: 100%;
+#display-media img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    border-radius: 8px;
+    animation: fadeIn 0.8s ease-in-out;
 }
 
-.close-hint {
-    position: absolute; top: -25px; right: 0;
-    font-size: 0.8rem; color: #666; cursor: pointer;
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
