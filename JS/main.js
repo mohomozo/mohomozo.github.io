@@ -1,72 +1,48 @@
-/* -------- PANEL SWITCH -------- */
+console.log("MAIN JS RUNNING");
 
-function showPanel(id) {
-  document.querySelectorAll('.panel').forEach(p => {
-    p.classList.remove('active');
+/* ---------- PANEL SWITCH ---------- */
+
+const navButtons = document.querySelectorAll('.main-nav button');
+const panels = document.querySelectorAll('.panel');
+
+navButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.panel;
+
+    panels.forEach(p => p.classList.remove('active'));
+    document.getElementById(target).classList.add('active');
   });
+});
 
-  const target = document.getElementById(id);
-  if (target) {
-    target.classList.add('active');
-    target.scrollIntoView({ behavior: 'smooth' });
-  }
-}
-
-/* -------- HERO VIDEO INSTABILITY -------- */
+/* ---------- HERO VIDEO DRIFT ---------- */
 
 const heroVideo = document.getElementById('heroVideo');
+let t = 0;
 
-let drift = 0;
 setInterval(() => {
-  drift += (Math.random() - 0.5) * 0.2;
-  heroVideo.style.transform = `
-    scale(${1.02 + Math.sin(drift) * 0.02})
-    translate(${Math.sin(drift) * 4}px, ${Math.cos(drift) * 4}px)
-  `;
+  t += 0.02;
+  heroVideo.style.transform =
+    `scale(${1.03 + Math.sin(t) * 0.01}) translate(${Math.sin(t)*6}px, ${Math.cos(t)*6}px)`;
 }, 120);
 
-/* -------- PORTFOLIO FILTER -------- */
+/* ---------- PORTFOLIO FILTER ---------- */
 
-function filterPortfolio(type) {
-  const buttons = document.querySelectorAll('.portfolio-menu button');
-  buttons.forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
+const filterButtons = document.querySelectorAll('.portfolio-menu button');
+const items = document.querySelectorAll('.portfolio-item');
 
-  const items = document.querySelectorAll('.portfolio-item');
-  items.forEach(item => {
-    if (type === 'all' || item.dataset.type === type) {
-      item.style.display = 'block';
-      item.style.animation = 'panelIn 0.6s ease';
-    } else {
-      item.style.display = 'none';
-    }
+filterButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterButtons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const type = btn.dataset.filter;
+
+    items.forEach(item => {
+      if (type === 'all' || item.dataset.type === type) {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
+    });
   });
-}
-
-/* -------- LIGHTBOX -------- */
-
-function openLightbox(content) {
-  const box = document.getElementById('lightbox');
-  const container = document.getElementById('lightbox-media-container');
-  container.innerHTML = '';
-  container.appendChild(content.cloneNode(true));
-  box.classList.add('active');
-}
-
-function closeLightbox() {
-  document.getElementById('lightbox').classList.remove('active');
-}
-
-/* -------- NAV AUTO FADE (anti UX) -------- */
-
-let nav = document.querySelector('.main-nav');
-let lastScroll = window.scrollY;
-
-window.addEventListener('scroll', () => {
-  if (window.scrollY > lastScroll) {
-    nav.style.opacity = '0';
-  } else {
-    nav.style.opacity = '1';
-  }
-  lastScroll = window.scrollY;
 });
