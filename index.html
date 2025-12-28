@@ -1,37 +1,78 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohomozo | Interactive Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Mohammad Mozafari | Multimedia Artist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
 
-    <div class="main-wrapper">
-        <svg class="network-svg" viewBox="0 0 100 100">
-            <line x1="50" y1="50" x2="25" y2="70" class="blue-line" />
-            <line x1="50" y1="50" x2="40" y2="30" class="blue-line" />
-            <line x1="50" y1="50" x2="75" y2="35" class="blue-line" />
-        </svg>
-
-        <div class="nodes-container">
-            <div class="red-dot dot-center" onclick="updateContent('center')"></div>
-            <div class="red-dot dot-1" onclick="updateContent('p1')"></div>
-            <div class="red-dot dot-2" onclick="updateContent('p2')"></div>
-            <div class="red-dot dot-3" onclick="updateContent('p3')"></div>
-        </div>
-
-        <div class="info-grid-top-left" id="display-media">
-            <div class="placeholder-text">تصویر پروژه</div>
-        </div>
-
-        <div class="info-grid-bottom-right" id="display-text">
-            <h2 id="project-title">انتخاب کنید</h2>
-            <p id="project-desc">روی یکی از نقاط قرمز کلیک کنید تا جزئیات پروژه نمایش داده شود.</p>
-        </div>
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <div class="lightbox-content" onclick="event.stopPropagation()">
+        <span class="close-btn" onclick="closeLightbox()">&times;</span>
+        <div id="lightbox-media-container"></div>
     </div>
+</div>
 
-    <script src="main.js"></script>
+<header class="hero">
+    <div class="video-container">
+        <video id="heroVideo" autoplay muted loop playsinline webkit-playsinline>
+            <source src="assets/loop.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+    <div class="hero-text">
+        <h1 id="heroTitle">MOHOMOZO</h1>
+        <p id="heroSubtitle">Experimental Multimedia Artist</p>
+    </div>
+</header>
+
+<nav class="main-nav">
+    <div class="nav-links">
+        <a onclick="showPanel('home')" class="nav-item">Home</a>
+        <a onclick="showPanel('about')" class="nav-item">About</a>
+        <a onclick="showPanel('portfolio')" class="nav-item">Portfolio</a>
+        <a onclick="showPanel('work')" class="nav-item">W.I.P</a>
+    </div>
+</nav>
+
+<main id="content">
+    <section id="home" class="panel active">
+        <div class="reveal-text">
+            <h2>Mohammad Mozafari</h2>
+            <p>Exploring the intersection of animation, video, and conceptual art.</p>
+        </div>
+    </section>
+
+    <section id="about" class="panel">
+        <div class="about-content">
+            <h2>About Me</h2>
+            <p>Mohammad Mozafari is an experimental multimedia artist whose practice spans animation, theater-based video production, painting, and sculpture.</p>
+        </div>
+    </section>
+
+    <section id="portfolio" class="panel">
+        <div class="portfolio-header">
+            <div class="portfolio-menu">
+                <button onclick="filterPortfolio('all')" class="active">All</button>
+                <button onclick="filterPortfolio('painting')">Painting</button>
+                <button onclick="filterPortfolio('illustration')">Illustration</button>
+                <button onclick="filterPortfolio('animation')">Animation</button>
+            </div>
+        </div>
+        <div class="portfolio-container" id="portfolio-grid"></div>
+    </section>
+
+    <section id="work" class="panel">
+        <h2>Ongoing Projects</h2>
+        <div class="grid" id="wip-grid"></div>
+    </section>
+</main>
+
+<script src="JS/data.js"></script>
+<script src="JS/main.js"></script>
 </body>
 </html>
