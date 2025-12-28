@@ -1,15 +1,92 @@
+/* Base */
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body, html { width: 100%; height: 100%; overflow: hidden; font-family: 'Inter', sans-serif; background: #05070c; color: #eaeaea; }
-canvas { display: block; position: fixed; top: 0; left: 0; z-index: 1; }
+html,body { height:100%; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: #05070c;
+  color: #eaeaea;
+  overflow: hidden;
+}
 
-main { position: relative; z-index: 10; }
-.panel { display: none; min-height: 100vh; padding: 10vh 10vw; background: rgba(5,7,12,0.7); backdrop-filter: blur(8px); }
+/* Canvas sits behind content */
+canvas#mainCanvas {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  display: block;
+}
+
+/* Nav (top-right) */
+.main-nav {
+  position: fixed;
+  top: 28px;
+  right: 32px;
+  z-index: 30;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.main-nav button {
+  background: rgba(0,0,0,0.45);
+  border: 1px solid rgba(255,255,255,0.06);
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Syncopate', sans-serif;
+  letter-spacing: 0.12em;
+  opacity: .85;
+  transition: transform .18s ease, background .18s ease, opacity .18s;
+}
+.main-nav button:hover { transform: translateX(-6px); background: rgba(255,216,77,0.06); opacity: 1; }
+
+/* Panels overlayed above canvas */
+main { position: relative; z-index: 20; pointer-events: none; }
+/* pointer-events none so canvas still gets clicks if needed; inside panels we enable pointer-events on actionable elements */
+.panel {
+  min-height: 100vh;
+  padding: 16vh 8vw;
+  display: none;
+  background: rgba(5,7,12,0.48); /* semi-opaque so particles are visible under */
+  backdrop-filter: blur(6px);
+  border-top: 1px solid rgba(255,255,255,0.02);
+  color: #eaeaea;
+  pointer-events: auto;
+}
 .panel.active { display: block; }
 
-.main-nav { position: fixed; top: 30px; right: 40px; z-index: 20; }
-.main-nav button { display: block; background: none; border: none; color: #fff; margin-bottom: 12px; cursor: pointer; opacity: 0.6; }
-.main-nav button:hover { opacity: 1; }
+/* Typography */
+.panel h2 { font-family: 'Syncopate', sans-serif; font-size: 2.4rem; color: #ffd84d; margin-bottom: 14px; }
+.panel p { opacity: .9; max-width: 780px; line-height: 1.6; }
 
-.grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 30px; margin-top: 60px; }
-.item img { width: 100%; display: block; }
-.item h4 { margin-top: 8px; font-size: 0.9rem; opacity: 0.8; }
+/* Grids for projects */
+.grid {
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 22px;
+}
+.item {
+  background: rgba(255,255,255,0.02);
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 8px;
+  cursor: pointer;
+  transition: transform .28s ease, box-shadow .28s ease;
+}
+.item:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(0,0,0,0.6); }
+.item img { width: 100%; height: 160px; object-fit: cover; display:block; border-radius:6px; }
+
+/* states (visual tweaks on hero via body class) */
+body.state-home canvas { filter: none; }
+body.state-about canvas { filter: grayscale(.35) blur(.6px) contrast(.95); }
+body.state-portfolio canvas { filter: contrast(1.12) saturate(1.08); }
+body.state-work canvas { filter: blur(.9px) brightness(.85); }
+
+/* small screen fallback */
+@media (max-width:900px) {
+  .main-nav { right: 12px; top: 16px; }
+  .panel { padding: 18vh 6vw; }
+  .item img { height: 140px; }
+}
