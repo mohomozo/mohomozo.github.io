@@ -1,43 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mohammad Mozafari | Interactive Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="CSS/style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mohammad Mozafari — Interactive Portfolio</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="CSS/style.css">
 </head>
-<body>
+<body class="state-home">
 
-<canvas id="mainCanvas"></canvas>
+  <!-- full-screen canvas (particles & effects) -->
+  <canvas id="mainCanvas"></canvas>
 
-<nav class="main-nav">
-  <button data-panel="home">Home</button>
-  <button data-panel="about">About</button>
-  <button data-panel="portfolio">Portfolio</button>
-  <button data-panel="work">W.I.P</button>
-</nav>
+  <!-- navigation (triggers explosion -> morph) -->
+  <nav class="main-nav">
+    <button data-panel="home">Home</button>
+    <button data-panel="about">About</button>
+    <button data-panel="portfolio">Portfolio</button>
+    <button data-panel="work">W.I.P</button>
+  </nav>
 
-<main>
-  <section id="home" class="panel active">
-    <h2>Mohammad Mozafari</h2>
-    <p>Animation, image, deformation, process.</p>
-  </section>
-  <section id="about" class="panel">
-    <h2>About</h2>
-    <p>Experimental multimedia artist working across multiple disciplines.</p>
-  </section>
-  <section id="portfolio" class="panel">
-    <h2>Portfolio</h2>
-    <div id="portfolioGrid" class="grid"></div>
-  </section>
-  <section id="work" class="panel">
-    <h2>Work In Progress</h2>
-    <div id="wipGrid" class="grid"></div>
-  </section>
-</main>
+  <!-- content panels (visible overlays) -->
+  <main>
+    <section id="home" class="panel active">
+      <h2>Mohammad Mozafari</h2>
+      <p>Animation, deformation, image & process — experimental motion practice.</p>
+    </section>
 
-<script src="JS/data.js"></script>
-<script src="JS/main.js"></script>
+    <section id="about" class="panel">
+      <h2>About</h2>
+      <p>Mohammad Mozafari is an experimental multimedia artist working across animation, theater-based video, painting and image-based research.</p>
+    </section>
+
+    <section id="portfolio" class="panel">
+      <h2>Portfolio</h2>
+      <div id="portfolioGrid" class="grid"></div>
+    </section>
+
+    <section id="work" class="panel">
+      <h2>Work In Progress</h2>
+      <div id="wipGrid" class="grid"></div>
+    </section>
+  </main>
+
+  <!-- Your data (replace JS/data.js with your file or keep this external) -->
+  <script src="JS/data.js"></script>
+
+  <!-- main interactive script -->
+  <script src="JS/main.js"></script>
 </body>
 </html>
