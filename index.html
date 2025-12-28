@@ -1,347 +1,47 @@
-<!doctype html>
-<html lang="fa">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Mohomozo — Experiential Portfolio</title>
-<link rel="icon" href="data:," />
-<style>
-  :root{
-    --bg:#071018;
-    --accent:#ffd84d;
-    --muted:#bfc7cf;
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial}
-  body{
-    background:var(--bg);
-    color:var(--muted);
-    overflow-x:hidden;
-    -webkit-font-smoothing:antialiased;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mohammad Mozafari | Multimedia Artist</title>
 
-  /* LAYOUT */
-  .app{min-height:100vh;display:flex;flex-direction:column;}
-  header{
-    position:fixed;left:0;right:0;top:0;height:64px;pointer-events:none;
-    display:flex;align-items:center;justify-content:space-between;padding:0 24px;z-index:60;
-  }
-  .brand{font-weight:700;letter-spacing:0.06em;color:var(--muted);font-size:14px;background:transparent;padding:6px 10px;border-radius:6px;pointer-events:auto}
-  .tiny-ghost{opacity:.7;font-size:12px}
-
-  /* Hidden nav (appears on reverse scroll or long hover) */
-  .nav{
-    position:fixed;right:24px;top:76px;background:rgba(255,255,255,0.03);backdrop-filter:blur(4px);
-    padding:10px;border-radius:10px;display:flex;flex-direction:column;gap:8px;z-index:70;pointer-events:none;
-    transform:translateY(-6px);opacity:0;transition:opacity .28s,transform .28s;
-  }
-  .nav.visible{opacity:1;transform:translateY(0);pointer-events:auto}
-  .nav button{background:none;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:8px;color:var(--muted);cursor:pointer;font-size:13px}
-  .nav button:hover{border-color:var(--accent);color:var(--accent);transform:translateX(4px);transition:all .18s}
-
-  /* HERO */
-  .hero{
-    height:100vh;display:grid;place-items:center;position:relative;overflow:hidden;
-  }
-
-  .hero-canvas{
-    position:absolute;inset:0;pointer-events:none;
-    display:block;
-  }
-
-  /* looping abstract visual (placeholder) */
-  .hero-loop{
-    width:min(1100px,92vw);height:min(620px,72vh);border-radius:12px;overflow:hidden;position:relative;
-    box-shadow:0 20px 60px rgba(0,0,0,.6);border:1px solid rgba(255,255,255,0.03);background:#000;
-    display:flex;align-items:center;justify-content:center;
-  }
-  .hero-loop video{width:100%;height:100%;object-fit:cover;filter:contrast(1.08) saturate(1.1);mix-blend-mode:screen}
-
-  /* subtle breathing overlay */
-  .breath{
-    position:absolute;inset:0;pointer-events:none;mix-blend-mode:overlay;opacity:.22;
-    background:radial-gradient(ellipse at 10% 20%, rgba(255,216,77,.12), transparent 10%),
-               radial-gradient(ellipse at 90% 80%, rgba(9,183,214,.06), transparent 15%);
-    animation:inhale 6s ease-in-out infinite;
-  }
-  @keyframes inhale{0%{transform:scale(0.995)}50%{transform:scale(1.02)}100%{transform:scale(0.995)}}
-
-  /* Morph on scroll - project list */
-  main{margin-top:0}
-  section.project-list{padding:120px 8vw 220px;min-height:120vh;display:flex;flex-direction:column;gap:60px}
-  .case{
-    display:grid;grid-template-columns:1fr 380px;gap:36px;align-items:start;position:relative;
-    transform-origin:center left;transition:transform .45s ease,filter .45s ease;
-    will-change:transform,filter;
-  }
-  .case.shrink{transform:scale(.98) skewX(-1.2deg);filter:blur(.2px) brightness(.96)}
-  .case .media{height:320px;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,0.03)}
-  .case video{width:100%;height:100%;object-fit:cover}
-  .case .meta{padding:6px 0;display:flex;flex-direction:column;gap:12px}
-  .title{font-family: "Times New Roman", serif;font-size:20px;color:var(--accent);letter-spacing:.02em}
-  .statement{font-size:13px;line-height:1.45;color:var(--muted);opacity:.95}
-
-  /* broken vertical timeline visual */
-  .timeline{
-    position:absolute;left: calc(50% - 8px);top:-40px;bottom:-40px;width:16px;display:flex;flex-direction:column;align-items:center;gap:18px;pointer-events:none;
-  }
-  .timeline .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px rgba(255,216,77,.2)}
-  .timeline .seg{width:2px;background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));flex:1}
-
-  /* ABOUT / Residue */
-  section.about{padding:120px 10vw 160px;min-height:60vh;display:flex;align-items:center;gap:36px}
-  .manifesto{max-width:720px;font-family:Georgia, serif;color:var(--muted);font-size:18px;line-height:1.6;background:linear-gradient(90deg, rgba(255,255,255,0.02), transparent);padding:28px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
-
-  /* Contact minimal */
-  footer.contact{padding:80px 10vw 140px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;align-items:center}
-  .ghost{opacity:.6;font-size:12px}
-
-  /* cursor distort */
-  .cursor-glitch{
-    position:fixed;top:0;left:0;width:18px;height:18px;border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);z-index:200;mix-blend-mode:screen;
-    background:radial-gradient(circle at 30% 30%, rgba(255,216,77,.9), rgba(0,0,0,0));
-    transition:width .12s,height .12s,opacity .12s;
-    opacity:0.85;
-  }
-
-  /* responsiveness */
-  @media (max-width:900px){
-    .case{grid-template-columns:1fr;gap:18px}
-    .timeline{display:none}
-    .nav{right:12px;top:90px}
-    .hero-loop{height:46vh}
-  }
-</style>
+  <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
-<div class="app">
-  <header>
-    <div class="brand">MOHOMOZO</div>
-    <div class="tiny-ghost">Experiments > Not Commercial</div>
-  </header>
 
-  <div class="nav" id="nav">
-    <button data-target="distort">Distort</button>
-    <button data-target="observe">Observe</button>
-    <button data-target="residue">Residue</button>
-    <button data-target="trace">Trace</button>
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lightbox">
+  <div class="lightbox-content">
+    <span class="close-btn" id="closeLightbox">&times;</span>
+    <div id="lightbox-media-container"></div>
   </div>
-
-  <div class="hero" id="hero">
-    <div class="hero-loop" id="heroLoop" aria-hidden="true">
-      <!-- placeholder looping video: replace src with your loop.mp4 -->
-      <video autoplay loop muted playsinline src="https://interactive-examples.mdn.mozilla.net/media/examples/flower.webm"></video>
-    </div>
-    <div class="breath"></div>
-  </div>
-
-  <main>
-    <section class="project-list" id="distort">
-      <!-- timeline decoration -->
-      <div class="timeline" aria-hidden="true">
-        <div class="dot"></div><div class="seg"></div><div class="dot"></div><div class="seg"></div><div class="dot"></div>
-      </div>
-
-      <!-- Cases: repeatable -->
-      <article class="case" data-index="0">
-        <div class="media">
-          <video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" autoplay loop muted playsinline></video>
-        </div>
-        <div class="meta">
-          <div class="title">The Animator as Weather</div>
-          <div class="statement">
-            This piece refuses to be a portrait. It is an instability — a record of tension between frame and form.
-          </div>
-        </div>
-      </article>
-
-      <article class="case shrink" data-index="1">
-        <div class="media">
-          <video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" autoplay loop muted playsinline></video>
-        </div>
-        <div class="meta">
-          <div class="title">Residue of Motion</div>
-          <div class="statement">Cropped, offset, and half-remembered — the project is a case file not a catalogue.</div>
-        </div>
-      </article>
-
-      <article class="case" data-index="2">
-        <div class="media">
-          <video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" autoplay loop muted playsinline></video>
-        </div>
-        <div class="meta">
-          <div class="title">Fault Lines</div>
-          <div class="statement">Soundless breaks and small lags become the project's grammar.</div>
-        </div>
-      </article>
-
-    </section>
-
-    <section class="about" id="observe">
-      <div class="manifesto">
-        <strong>Manifesto</strong>
-        <p>Animation here is not illustration. It is a living process — imperfect, reactive, sometimes hostile to comprehension. I am not offering stories to be consumed; I am exposing mechanisms that breathe, strain, and fail.</p>
-      </div>
-      <div style="max-width:360px;opacity:.7;">
-        <div style="font-weight:700;color:var(--accent);margin-bottom:12px">Quick Facts</div>
-        <div>Formats: 4K masters, trailers, press stills</div>
-        <div style="margin-top:10px">Audience: festivals, art-house, experimental forums</div>
-      </div>
-    </section>
-
-    <footer class="contact" id="trace">
-      <div>
-        <div class="ghost">Contact (minimal)</div>
-        <div style="margin-top:6px">mohomozo [at] example — prefer ephemeral exchange</div>
-      </div>
-      <div class="ghost">© Mohomozo</div>
-    </footer>
-
-  </main>
-
-  <div class="cursor-glitch" id="cursor"></div>
 </div>
 
-<script>
-/* Core interactions: scroll-driven morph, hidden nav on reverse scroll, hover glitches, cursor reactive */
+<header class="hero">
+  <div class="video-container">
+    <video id="heroVideo" autoplay muted loop playsinline>
+      <source src="assets/loop.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
+  </div>
 
-/* NAV show on reverse scroll or long hover */
-(function(){
-  const nav = document.getElementById('nav');
-  let lastY = window.scrollY;
-  let timer = null;
+  <div class="hero-text">
+    <h1>MOHOMOZO</h1>
+    <p>Experimental Multimedia Artist</p>
+  </div>
+</header>
 
-  function onScroll(){
-    const y = window.scrollY;
-    if (y < lastY) { // reverse scroll -> show
-      nav.classList.add('visible');
-      clearTimeout(timer);
-      timer = setTimeout(()=>nav.classList.remove('visible'), 1800);
-    }
-    lastY = y;
-    // small heuristic: hide at top after delay
-    if (y < 40) nav.classList.remove('visible');
-  }
-  window.addEventListener('scroll', onScroll, {passive:true});
+<nav class="main-nav">
+  <button data-panel="home">Home</button>
+  <button data-panel="about">About</button>
+  <button data-panel="portfolio">Portfolio</button>
+  <button data-panel="work">W.I.P</button>
+</nav>
 
-  // long hover: keep visible
-  document.addEventListener('mousemove', (e)=>{
-    // if pointer hovers near right edge for > 600ms, reveal
-    if (window.innerWidth - e.clientX < 120){
-      if (!nav.classList.contains('visible')){
-        nav.classList.add('visible');
-        clearTimeout(timer);
-        timer = setTimeout(()=>nav.classList.remove('visible'), 2200);
-      }
-    }
-  });
-})();
+<main id="content">
 
-/* Scroll-driven morph: add "shrink" class to cases based on viewport */
-(function(){
-  const cases = Array.from(document.querySelectorAll('.case'));
-  function update(){
-    const vh = window.innerHeight;
-    cases.forEach((c,i)=>{
-      const r = c.getBoundingClientRect();
-      const center = r.top + r.height*0.5;
-      const dist = Math.abs(center - vh*0.5);
-      // dist 0 -> active; larger -> scale down
-      if (dist < vh*0.45){
-        c.classList.remove('shrink');
-      } else {
-        c.classList.add('shrink');
-      }
-      // subtle skew / rotation based on scroll velocity
-      const skew = Math.min(6, Math.max(-6, (r.top - window.lastTop||0)*0.02 ));
-      c.style.transform = c.classList.contains('shrink') ? `scale(.985) skewX(${skew}deg)` : `scale(1) skewX(${skew/2}deg)`;
-    });
-    window.lastTop = window.scrollY;
-  }
-  window.addEventListener('scroll', update, {passive:true});
-  update();
-})();
-
-/* Hover glitch on media */
-(function(){
-  document.querySelectorAll('.media').forEach(m=>{
-    let timeout;
-    m.addEventListener('mouseenter', e=>{
-      m.style.transform = 'translateX(-6px) translateY(3px) rotate(-.6deg)';
-      m.style.transition = 'transform .22s cubic-bezier(.2,.9,.1,1)';
-      // quick flicker overlay (CSS-free)
-      const overlay = document.createElement('div');
-      overlay.style.position='absolute';
-      overlay.style.inset=0;
-      overlay.style.pointerEvents='none';
-      overlay.style.background='linear-gradient(90deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06))';
-      overlay.style.mixBlendMode='screen';
-      overlay.style.animation='flick 0.32s steps(3, end)';
-      overlay.className='tmpOverlay';
-      overlay.style.zIndex=10;
-      m.appendChild(overlay);
-      timeout = setTimeout(()=>{ if(overlay.parentNode) overlay.remove(); }, 380);
-    });
-    m.addEventListener('mouseleave', e=>{
-      m.style.transform = '';
-      clearTimeout(timeout);
-      const overlay = m.querySelector('.tmpOverlay');
-      if (overlay) overlay.remove();
-    });
-  });
-  // keyframe injection for flick (JS-only to keep single file)
-  const style = document.createElement('style');
-  style.innerHTML = '@keyframes flick{0%{opacity:.2}50%{opacity:.9}100%{opacity:.2}}';
-  document.head.appendChild(style);
-})();
-
-/* Click lag: intentional micro-delay to break control */
-(function(){
-  document.querySelectorAll('.case .media, .nav button').forEach(el=>{
-    el.addEventListener('click', (e)=>{
-      e.preventDefault();
-      e.stopPropagation();
-      // micro delay and then scroll to section / open modal (here: simple focus effect)
-      el.style.transition='transform .28s cubic-bezier(.2,.8,.2,1)';
-      el.style.transform='scale(.995) translateY(3px)';
-      setTimeout(()=>{ el.style.transform=''; }, 380);
-
-      // if nav button, jump to section with slight lag
-      if (el.tagName === 'BUTTON' && el.dataset.target){
-        const t = document.getElementById(el.dataset.target);
-        setTimeout(()=> t && t.scrollIntoView({behavior:'smooth', block:'start'}), 320);
-      }
-    });
-  });
-})();
-
-/* cursor reactive */
-(function(){
-  const cursor = document.getElementById('cursor');
-  document.addEventListener('mousemove', (e)=>{
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top  = e.clientY + 'px';
-    cursor.style.opacity = 1;
-  });
-  // enlarge on interactive elements
-  ['mouseenter','mouseleave'].forEach(evt=>{
-    document.addEventListener(evt, (e)=>{
-      const t = e.target;
-      if (t.tagName === 'BUTTON' || t.closest('.media') || t.tagName==='A'){
-        if (evt==='mouseenter'){ cursor.style.width='34px'; cursor.style.height='34px'; }
-        else { cursor.style.width='18px'; cursor.style.height='18px'; }
-      }
-    }, true);
-  });
-})();
-
-/* accessibility: simple keyboard nav */
-(function(){
-  document.addEventListener('keydown', (e)=>{
-    if (e.key === 'n'){ document.getElementById('distort').scrollIntoView({behavior:'smooth'}); }
-    if (e.key === 'm'){ document.getElementById('observe').scrollIntoView({behavior:'smooth'}); }
-  });
-})();
-</script>
-</body>
-</html>
+  <section id="home" class="panel active">
+    <h2>Mohammad Mozafari</h2>
+    <p>
+      Exploring the intersection of animation
