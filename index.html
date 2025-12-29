@@ -1,31 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa">
 <head>
-<meta charset="UTF-8">
-<title>MOHOMOZO</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mohomozo — Living Surface (Maximal + Human)</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<canvas id="fx"></canvas>
+  <!-- full-canvas background (stars / organic noise) -->
+  <canvas id="bgCanvas"></canvas>
 
-<section class="stage">
-  <video id="bgVideo" autoplay muted loop playsinline>
+  <!-- SVG layer for organic hand-drawn connections -->
+  <svg id="svgLayer" xmlns="http://www.w3.org/2000/svg"></svg>
+
+  <!-- video loop (optional) -->
+  <video id="loopVid" class="loop-video" autoplay muted loop playsinline>
     <source src="assets/loop.mp4" type="video/mp4">
   </video>
 
-  <div class="panels">
-    <button data-panel="home">HOME</button>
-    <button data-panel="portfolio">PORTFOLIO</button>
-    <button data-panel="about">ABOUT</button>
-    <button data-panel="wip">WIP</button>
-  </div>
-</section>
+  <!-- Node panels (placed visually across the surface) -->
+  <div class="node node-home" data-target="home" data-title="HOME">HOME</div>
+  <div class="node node-portfolio" data-target="portfolio" data-title="PORTFOLIO">PORTFOLIO</div>
+  <div class="node node-about" data-target="about" data-title="ABOUT">ABOUT</div>
+  <div class="node node-wip" data-target="wip" data-title="W.I.P">W.I.P</div>
 
-<script src="script.js"></script>
+  <!-- content overlay that expands from click point -->
+  <div id="panelOverlay" class="overlay hidden" aria-hidden="true">
+    <button id="closeOverlay" class="close-btn">✕</button>
+    <div id="panelContent" class="panel-content"></div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
