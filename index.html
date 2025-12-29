@@ -1,78 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohammad Mozafari | Multimedia Artist</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="CSS/style.css">
+  <meta charset="UTF-8" />
+  <title>Mohomozo — Living Surface</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<!-- LIGHTBOX -->
-<div id="lightbox" class="lightbox" onclick="closeLightbox()">
-    <div class="lightbox-content" onclick="event.stopPropagation()">
-        <span class="close-btn" onclick="closeLightbox()">&times;</span>
-        <div id="lightbox-media-container"></div>
-    </div>
-</div>
+<canvas id="bg"></canvas>
+<svg id="connections"></svg>
 
-<header class="hero">
-    <div class="video-container">
-        <video id="heroVideo" autoplay muted loop playsinline webkit-playsinline>
-            <source src="assets/loop.mp4" type="video/mp4">
-        </video>
-        <div class="video-overlay"></div>
-    </div>
-    <div class="hero-text">
-        <h1 id="heroTitle">MOHOMOZO</h1>
-        <p id="heroSubtitle">Experimental Multimedia Artist</p>
-    </div>
-</header>
+<div class="panel home" data-target="home">HOME</div>
+<div class="panel portfolio" data-target="portfolio">PORTFOLIO</div>
+<div class="panel about" data-target="about">ABOUT</div>
+<div class="panel wip" data-target="wip">WIP</div>
 
-<nav class="main-nav">
-    <div class="nav-links">
-        <a onclick="showPanel('home')" class="nav-item">Home</a>
-        <a onclick="showPanel('about')" class="nav-item">About</a>
-        <a onclick="showPanel('portfolio')" class="nav-item">Portfolio</a>
-        <a onclick="showPanel('work')" class="nav-item">W.I.P</a>
-    </div>
-</nav>
+<div id="overlay"></div>
 
-<main id="content">
-    <section id="home" class="panel active">
-        <div class="reveal-text">
-            <h2>Mohammad Mozafari</h2>
-            <p>Exploring the intersection of animation, video, and conceptual art.</p>
-        </div>
-    </section>
-
-    <section id="about" class="panel">
-        <div class="about-content">
-            <h2>About Me</h2>
-            <p>Mohammad Mozafari is an experimental multimedia artist whose practice spans animation, theater-based video production, painting, and sculpture.</p>
-        </div>
-    </section>
-
-    <section id="portfolio" class="panel">
-        <div class="portfolio-header">
-            <div class="portfolio-menu">
-                <button onclick="filterPortfolio('all')" class="active">All</button>
-                <button onclick="filterPortfolio('painting')">Painting</button>
-                <button onclick="filterPortfolio('illustration')">Illustration</button>
-                <button onclick="filterPortfolio('animation')">Animation</button>
-            </div>
-        </div>
-        <div class="portfolio-container" id="portfolio-grid"></div>
-    </section>
-
-    <section id="work" class="panel">
-        <h2>Ongoing Projects</h2>
-        <div class="grid" id="wip-grid"></div>
-    </section>
-</main>
-
-<script src="JS/data.js"></script>
-<script src="JS/main.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
