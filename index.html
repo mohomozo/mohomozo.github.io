@@ -1,21 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Mohomozo — Living Surface</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<title>MOHOMOZO</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<canvas id="bg"></canvas>
-<svg id="connections"></svg>
+<canvas id="fx"></canvas>
 
-<div class="panel home" data-target="home">HOME</div>
-<div class="panel portfolio" data-target="portfolio">PORTFOLIO</div>
-<div class="panel about" data-target="about">ABOUT</div>
-<div class="panel wip" data-target="wip">WIP</div>
+<section class="stage">
+  <video id="bgVideo" autoplay muted loop playsinline>
+    <source src="assets/loop.mp4" type="video/mp4">
+  </video>
 
-<div id="overlay"></div>
+  <div class="panels">
+    <button data-panel="home">HOME</button>
+    <button data-panel="portfolio">PORTFOLIO</button>
+    <button data-panel="about">ABOUT</button>
+    <button data-panel="wip">WIP</button>
+  </div>
+</section>
 
 <script src="script.js"></script>
 </body>
