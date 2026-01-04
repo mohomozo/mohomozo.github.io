@@ -89,3 +89,11 @@ export default function DotShader() {
     </Canvas>
   )
 }
+'use client'
+
+import { DotScreenShader } from '../js/dot-shader'
+
+export default function DotShader() {
+  return <DotScreenShader />
+}
+
