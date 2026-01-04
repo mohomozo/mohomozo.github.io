@@ -122,3 +122,21 @@ export default function Home() {
     </div>
   )
 }
+import Hero from '../components/Hero'
+import DotShader from '../components/DotShader'
+import Portfolio from '../components/Portfolio'
+import Wip from '../components/Wip'
+import Lightbox from '../components/Lightbox'
+
+export default function Home() {
+  return (
+    <>
+      <Hero />
+      <DotShader />
+      <Portfolio />
+      <Wip />
+      <Lightbox />
+    </>
+  )
+}
+
