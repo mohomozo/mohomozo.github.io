@@ -1,139 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dot Shader Background</title>
-<style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background: #121212;
-    height: 100%;
-    width: 100%;
-  }
-  canvas {
-    display: block;
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mohammad Mozafari | Multimedia Artist</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="CSS/style.css">
 </head>
+
 <body>
-<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
 
-<script id="vertexShader" type="x-shader/x-vertex">
-  varying vec2 vUv;
-  void main() {
-    vUv = uv;
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);
-  }
-</script>
+  <!-- DOT SHADER BACKGROUND -->
+  <canvas id="dotCanvas"></canvas>
 
-<script id="fragmentShader" type="x-shader/x-fragment">
-  uniform float time;
-  uniform vec2 resolution;
-  uniform vec3 dotColor;
-  uniform vec3 bgColor;
-  uniform sampler2D mouseTrail;
-  uniform float gridSize;
-  uniform float dotOpacity;
-  varying vec2 vUv;
+  <!-- LIGHTBOX -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <span class="close-btn" onclick="closeLightbox()">×</span>
+    <div id="lightbox-media-container"></div>
+  </div>
 
-  vec2 rotate(vec2 uv, float angle){
-      float s = sin(angle);
-      float c = cos(angle);
-      mat2 m = mat2(c,-s,s,c);
-      return m*(uv-0.5)+0.5;
-  }
+  <!-- HERO -->
+  <header class="hero">
+    <div class="video-container">
+      <video id="heroVideo" autoplay muted loop playsinline>
+        <source src="assets/loop.mp4" type="video/mp4">
+      </video>
+      <div class="video-overlay"></div>
+    </div>
 
-  float sdfCircle(vec2 p,float r){
-      return length(p-0.5)-r;
-  }
+    <div class="hero-text">
+      <h1 id="heroTitle">MOHOMOZO</h1>
+      <p class="hero-name">Mohammad Mozafari</p>
+      <p id="heroSubtitle">Experimental Multimedia Artist</p>
+    </div>
+  </header>
 
-  void main(){
-      vec2 uv = vUv;
-      vec2 rotatedUv = rotate(uv, 0.0);
+  <!-- NAV -->
+  <nav class="main-nav">
+    <div class="nav-links">
+      <a class="nav-item" onclick="showPanel('home')">Home</a>
+      <a class="nav-item" onclick="showPanel('about')">About</a>
+      <a class="nav-item" onclick="showPanel('portfolio')">Portfolio</a>
+      <a class="nav-item" onclick="showPanel('work')">W.I.P</a>
+    </div>
+  </nav>
 
-      vec2 gridUv = fract(rotatedUv*gridSize);
-      vec2 cellCenter = (floor(rotatedUv*gridSize)+0.5)/gridSize;
-      float mouseInfluence = texture2D(mouseTrail, cellCenter).r;
+  <!-- MAIN -->
+  <main id="content">
 
-      float dot = smoothstep(0.05, 0.0, sdfCircle(gridUv,0.25 + mouseInfluence*0.5));
-      vec3 color = mix(bgColor,dotColor,dot*dotOpacity);
-      gl_FragColor = vec4(color,1.0);
-  }
-</script>
+    <section id="home" class="panel active">
+      <h2>Mohammad Mozafari</h2>
+      <p>Exploring the intersection of animation, video, and conceptual art.</p>
+    </section>
 
-<script>
-  let scene, camera, renderer, material, mesh;
-  let mouseTrailTex, trailData;
-  const gridSize = 50;
-  const width = window.innerWidth;
-  const height = window.innerHeight;
+    <section id="about" class="panel">
+      <h2>About Me</h2>
+      <p>
+        Mohammad Mozafari is an experimental multimedia artist whose practice spans
+        animation, theater-based video production, painting, and sculpture.
+      </p>
+    </section>
 
-  init();
-  animate();
+    <section id="portfolio" class="panel">
+      <div class="portfolio-menu">
+        <button onclick="filterPortfolio('all')" class="active">All</button>
+        <button onclick="filterPortfolio('painting')">Painting</button>
+        <button onclick="filterPortfolio('illustration')">Illustration</button>
+        <button onclick="filterPortfolio('animation')">Animation</button>
+      </div>
+      <div class="portfolio-container" id="portfolio-grid"></div>
+    </section>
 
-  function init(){
-      scene = new THREE.Scene();
-      camera = new THREE.OrthographicCamera(-1,1,1,-1,0,1);
-      renderer = new THREE.WebGLRenderer({antialias:true});
-      renderer.setSize(window.innerWidth,window.innerHeight);
-      document.body.appendChild(renderer.domElement);
+    <section id="work" class="panel">
+      <h2>Ongoing Projects</h2>
+      <div class="grid" id="wip-grid"></div>
+    </section>
 
-      trailData = new Uint8Array(512*512*4);
-      for(let i=0;i<trailData.length;i++) trailData[i] = 0;
-      const trailTexture = new THREE.DataTexture(trailData,512,512,THREE.RGBAFormat);
-      trailTexture.needsUpdate = true;
-      mouseTrailTex = trailTexture;
+  </main>
 
-      material = new THREE.ShaderMaterial({
-          uniforms:{
-              time:{value:0},
-              resolution:{value:new THREE.Vector2(width,height)},
-              dotColor:{value:new THREE.Color('#ffffff')},
-              bgColor:{value:new THREE.Color('#121212')},
-              mouseTrail:{value:mouseTrailTex},
-              gridSize:{value:gridSize},
-              dotOpacity:{value:0.05}
-          },
-          vertexShader: document.getElementById('vertexShader').textContent,
-          fragmentShader: document.getElementById('fragmentShader').textContent
-      });
+  <script src="JS/data.js"></script>
+  <script src="JS/main.js"></script>
 
-      const geometry = new THREE.PlaneGeometry(2,2);
-      mesh = new THREE.Mesh(geometry,material);
-      scene.add(mesh);
-
-      window.addEventListener('mousemove',onMouseMove,false);
-      window.addEventListener('resize',onWindowResize,false);
-  }
-
-  function onWindowResize(){
-      material.uniforms.resolution.value.set(window.innerWidth,window.innerHeight);
-      renderer.setSize(window.innerWidth,window.innerHeight);
-  }
-
-  function onMouseMove(e){
-      const x = Math.floor((e.clientX/window.innerWidth)*512);
-      const y = Math.floor((1-e.clientY/window.innerHeight)*512);
-      const index = (y*512+x)*4;
-      trailData[index] = 255;
-      mouseTrailTex.needsUpdate = true;
-  }
-
-  function animate(){
-      requestAnimationFrame(animate);
-      material.uniforms.time.value = performance.now()*0.001;
-
-      // Fade the mouse trail
-      for(let i=0;i<trailData.length;i++){
-          trailData[i] = Math.max(0, trailData[i]-2);
-      }
-      mouseTrailTex.needsUpdate = true;
-
-      renderer.render(scene,camera);
-  }
-</script>
 </body>
 </html>
