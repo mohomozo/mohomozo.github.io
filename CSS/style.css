@@ -1,233 +1,307 @@
-*,
-*::before,
-*::after {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-html, body {
-  width: 100%;
-  height: 100%;
+body {
   background: #050505;
   color: #eaeaea;
   font-family: 'Inter', sans-serif;
-  overflow-x: hidden;
-}
-
-/* DOT SHADER */
-#dotCanvas {
-  position: fixed;
-  inset: 0;
-  z-index: -3;
-  pointer-events: none;
-}
-
-/* HERO */
-.hero {
-  position: relative;
-  width: 100%;
+  overflow: hidden; /* Scroll handled inside panels */
   height: 100vh;
-  overflow: hidden;
 }
 
-.video-container video {
+/* --- VIDEO BACKGROUND (FIXED) --- */
+.video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+
+.video-background video {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: opacity 0.6s ease, filter 0.6s ease;
+  transition: all 1.2s ease-in-out; /* Smooth fade/blur */
 }
 
 .video-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.35);
+  background: rgba(0,0,0,0.4);
+  z-index: -1;
+  pointer-events: none;
 }
 
-.hero-text {
-  position: relative;
-  z-index: 2;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  mix-blend-mode: difference;
+/* States for Video when panels are active */
+body.view-detail .video-background video {
+  opacity: 0.2;
+  filter: blur(8px) grayscale(80%);
+  transform: scale(1.05);
 }
 
-.hero-text h1 {
-  font-family: 'Syncopate', sans-serif;
-  font-size: clamp(3rem, 8vw, 7rem);
-  letter-spacing: 0.25em;
+/* --- DOT CANVAS --- */
+#dotCanvas {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
 }
 
-.hero-name {
-  font-family: 'Syncopate', sans-serif;
-  font-size: 0.6rem;
-  letter-spacing: 0.35em;
-  margin-top: 0.8rem;
-  opacity: 0.5;
-  text-transform: uppercase;
-}
-
-.hero-text p {
-  margin-top: 1rem;
-  font-size: 0.8rem;
-  opacity: 0.7;
-  letter-spacing: 0.2em;
-}
-
-/* NAV */
+/* --- NAV --- */
 .main-nav {
-  position: sticky;
+  position: fixed;
   top: 0;
-  backdrop-filter: blur(10px);
-  background: rgba(5,5,5,0.6);
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  padding: 1.5rem 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
 }
 
 .nav-links {
   display: flex;
   justify-content: center;
-  gap: 2rem;
-  padding: 1rem;
+  gap: 3rem;
 }
 
 .nav-item {
   font-family: 'Syncopate', sans-serif;
-  font-size: 0.7rem;
-  letter-spacing: 0.25em;
-  opacity: 0.6;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.6);
   cursor: pointer;
-}
-
-.nav-item:hover {
-  opacity: 1;
-}
-
-/* MAIN */
-#content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 6rem 2rem;
+  transition: 0.3s;
   position: relative;
-  z-index: 2;
+}
+
+.nav-item:hover, .nav-item.active {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+/* --- MAIN CONTAINER --- */
+#main-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  padding-top: 80px; /* Space for nav */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .panel {
   display: none;
-  padding-bottom: 6rem;
+  width: 100%;
+  height: 100%;
+  animation: fadeIn 0.8s ease;
 }
 
-.panel.active {
-  display: block;
+.panel.active-panel {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Center content */
 }
 
-/* PORTFOLIO */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- HOME HERO TEXT --- */
+#home.panel {
+  text-align: center;
+}
+
+.hero-text {
+  mix-blend-mode: difference;
+}
+
+.hero-text h1 {
+  font-family: 'Syncopate', sans-serif;
+  font-size: clamp(3rem, 8vw, 6rem);
+  letter-spacing: 0.2em;
+  margin-bottom: 0.5rem;
+}
+
+.hero-name {
+  font-family: 'Syncopate', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.hero-subtitle {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  opacity: 0.6;
+  letter-spacing: 0.15em;
+}
+
+/* --- GLASS CARD (For About, Portfolio, WIP) --- */
+.glass-card {
+  background: rgba(20, 20, 20, 0.45); /* Semi-transparent dark */
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 3rem;
+  width: 90%;
+  max-width: 1000px;
+  height: 85%; /* Fits within screen */
+  overflow-y: auto; /* Internal Scroll */
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+/* Scrollbar styling */
+.glass-card::-webkit-scrollbar { width: 6px; }
+.glass-card::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 3px; }
+
+.text-block {
+  margin-bottom: 3rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text-block h2 {
+  font-family: 'Syncopate', sans-serif;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #fff;
+  border-left: 3px solid #fff;
+  padding-left: 1rem;
+}
+
+.text-block p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.8);
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  margin: 2rem 0;
+}
+
+/* --- PORTFOLIO GRID --- */
 .portfolio-menu {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 3rem;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .portfolio-menu button {
-  background: none;
-  border: none;
-  color: #fff;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #aaa;
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
   font-family: 'Syncopate', sans-serif;
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
-  opacity: 0.5;
-  cursor: pointer;
+  font-size: 0.7rem;
+  transition: 0.3s;
 }
 
-.portfolio-menu button.active,
-.portfolio-menu button:hover {
-  opacity: 1;
+.portfolio-menu button:hover, .portfolio-menu button.active-filter {
+  background: #fff;
+  color: #000;
 }
 
-.portfolio-container,
-.grid {
+.portfolio-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
 }
 
-/* CARD GLASS */
-.project-card {
+.project-item {
   position: relative;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1;
   overflow: hidden;
+  border-radius: 4px;
   cursor: pointer;
-  background: rgba(255,255,255,0.04);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 12px;
-  transition: transform 0.3s ease;
 }
 
-.project-card img {
+.project-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(100%);
-  transition: 0.6s;
+  transition: transform 0.6s ease;
 }
 
-.project-card:hover img {
-  filter: grayscale(0%);
-  transform: scale(1.05);
-}
-
-.card-overlay {
+.project-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-  padding: 1.5rem;
+  background: rgba(0,0,0,0.7);
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
+  align-items: center;
   opacity: 0;
-  transition: 0.4s;
+  transition: opacity 0.4s ease;
+  text-align: center;
+  padding: 1rem;
 }
 
-.project-card:hover .card-overlay {
+.project-item:hover img {
+  transform: scale(1.1);
+}
+
+.project-item:hover .project-overlay {
   opacity: 1;
 }
 
-/* LIGHTBOX */
+/* --- LIGHTBOX --- */
 .lightbox {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.85);
-  display: none;
-  z-index: 10;
-  overflow-y: auto;
-  padding: 4rem 2rem;
+  background: rgba(0,0,0,0.95);
+  z-index: 200;
+  display: none; /* Hidden by default */
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
-.close-btn {
-  position: fixed;
-  top: 1.5rem;
-  right: 2rem;
-  font-size: 2rem;
-  cursor: pointer;
+.lightbox.active {
+  display: flex;
+  opacity: 1;
 }
 
-.lightbox img,
-.lightbox video {
+.lightbox-content {
   max-width: 90%;
-  margin: 2rem auto;
-  display: block;
+  max-height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
-#lightbox-media-container {
-  max-width: 1000px;
-  margin: auto;
+.lightbox-content img {
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  box-shadow: 0 0 30px rgba(0,0,0,0.8);
 }
 
-/* HERO GLASS EFFECT WHEN PORTFOLIO/WIP */
-.hero-video-blur {
-  filter: blur(4px) brightness(0.4);
-  transition: filter 0.6s ease, opacity 0.6s ease;
+.lightbox-info {
+  margin-top: 1.5rem;
+  color: #fff;
+}
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 3rem;
+  color: #fff;
+  cursor: pointer;
 }
