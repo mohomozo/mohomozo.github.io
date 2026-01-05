@@ -9,101 +9,91 @@
 </head>
 <body>
 
-  <!-- DOT SHADER BACKGROUND -->
-  <canvas id="dotCanvas"></canvas>
-
-  <!-- LIGHTBOX -->
-  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-    <span class="close-btn" onclick="closeLightbox()">×</span>
-    <div id="lightbox-media-container"></div>
+  <div class="video-background">
+    <video id="heroVideo" autoplay muted loop playsinline>
+      <source src="assets/loop.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
   </div>
 
-  <!-- HERO -->
-  <header class="hero">
-    <div class="video-container">
-      <video id="heroVideo" autoplay muted loop playsinline>
-        <source src="assets/loop.mp4" type="video/mp4">
-      </video>
-      <div class="video-overlay"></div>
-    </div>
-    <div class="hero-text">
-      <h1 id="heroTitle">MOHOMOZO</h1>
-      <p class="hero-name">Mohammad Mozafari</p>
-      <p id="heroSubtitle">Experimental Multimedia Artist</p>
-    </div>
-  </header>
+  <canvas id="dotCanvas"></canvas>
 
-  <!-- NAV -->
+  <div id="lightbox" class="lightbox">
+    <span class="close-btn" onclick="closeLightbox()">×</span>
+    <div class="lightbox-content">
+      <img id="lightbox-img" src="" alt="Project Detail">
+      <div class="lightbox-info">
+        <h3 id="lightbox-title">Project Title</h3>
+        <p id="lightbox-desc">Project description goes here.</p>
+      </div>
+    </div>
+  </div>
+
   <nav class="main-nav">
     <div class="nav-links">
-      <a class="nav-item" onclick="showPanel('home')">Home</a>
-      <a class="nav-item" onclick="showPanel('about')">About</a>
-      <a class="nav-item" onclick="showPanel('portfolio')">Portfolio</a>
-      <a class="nav-item" onclick="showPanel('work')">W.I.P</a>
+      <a class="nav-item active" onclick="switchTab('home')">Home</a>
+      <a class="nav-item" onclick="switchTab('about')">About</a>
+      <a class="nav-item" onclick="switchTab('portfolio')">Portfolio</a>
+      <a class="nav-item" onclick="switchTab('work')">W.I.P</a>
     </div>
   </nav>
 
-  <!-- MAIN -->
-  <main id="content">
+  <main id="main-container">
 
-    <!-- HOME -->
-    <section id="home" class="panel active">
-      <h2>Mohammad Mozafari</h2>
-      <p>
-        Mohammad Mozafari is an experimental multimedia artist whose practice spans
-        animation, painting, illustration, theater-based video production and
-        conceptual video art.
-      </p>
-      <p>
-        His work explores emotional states, subconscious narratives, and the tension
-        between personal identity and collective experience.
-      </p>
-    </section>
-
-    <!-- ABOUT -->
-    <section id="about" class="panel">
-      <h2>Artist Statement</h2>
-      <p>
-        My work operates at the intersection of emotion, memory, and experimental form.
-        I move freely between mediums because each material reveals a different layer
-        of meaning.
-      </p>
-      <p>
-        I build hybrid visual languages that invite viewers to feel ideas before fully
-        understanding them.
-      </p>
-
-      <h2 style="margin-top:3rem;">Approach & Process</h2>
-      <p>
-        I approach each project as an open experiment.
-        Improvisation, intuition, and material exploration guide my process.
-      </p>
-      <p>
-        Accidents and unexpected outcomes often become the core of the final work.
-      </p>
-    </section>
-
-    <!-- PORTFOLIO -->
-    <section id="portfolio" class="panel">
-      <div class="portfolio-menu">
-        <button onclick="filterPortfolio('all')" class="active">All</button>
-        <button onclick="filterPortfolio('painting')">Painting</button>
-        <button onclick="filterPortfolio('illustration')">Illustration</button>
-        <button onclick="filterPortfolio('animation')">Animation</button>
+    <section id="home" class="panel active-panel">
+      <div class="hero-text">
+        <h1>MOHOMOZO</h1>
+        <p class="hero-name">Mohammad Mozafari</p>
+        <p class="hero-subtitle">Experimental Multimedia Artist</p>
       </div>
-      <div class="portfolio-container" id="portfolio-grid"></div>
     </section>
 
-    <!-- WIP -->
+    <section id="about" class="panel">
+      <div class="glass-card content-scroll">
+        <div class="text-block">
+          <h2>Artist Bio</h2>
+          <p>Mohammad Mozafari is an experimental multimedia artist whose practice spans animation, painting, illustration, theater-based video production, and conceptual video art. His work explores emotional states, subconscious narratives, and the tension between personal identity and collective experience.</p>
+        </div>
+        
+        <div class="divider"></div>
+
+        <div class="text-block">
+          <h2>Artist Statement</h2>
+          <p>My work operates at the intersection of emotion, memory, and experimental form. I move freely between mediums because each material reveals a different layer of meaning. I build hybrid visual languages that invite viewers to feel ideas before fully understanding them.</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="text-block">
+          <h2>Approach & Process</h2>
+          <p>I approach each project as an open experiment. Improvisation, intuition, and material exploration guide my process. Accidents and unexpected outcomes often become the core of the final work.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio" class="panel">
+      <div class="glass-card full-width">
+        <div class="portfolio-menu">
+          <button onclick="filterPortfolio('all')" class="active-filter">All</button>
+          <button onclick="filterPortfolio('painting')">Painting</button>
+          <button onclick="filterPortfolio('illustration')">Illustration</button>
+          <button onclick="filterPortfolio('animation')">Animation</button>
+        </div>
+        
+        <div class="portfolio-grid" id="portfolio-grid"></div>
+      </div>
+    </section>
+
     <section id="work" class="panel">
-      <h2>Ongoing Projects</h2>
-      <div class="grid" id="wip-grid"></div>
+      <div class="glass-card full-width">
+        <h2>Ongoing Projects</h2>
+        <p style="margin-bottom: 2rem; opacity: 0.7;">Behind the scenes and experimental sketches.</p>
+        <div class="portfolio-grid" id="wip-grid"></div>
+      </div>
     </section>
 
   </main>
 
-  <script src="JS/data.js"></script>
   <script src="JS/main.js"></script>
-
 </body>
 </html>
