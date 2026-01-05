@@ -1,7 +1,17 @@
+/* PANEL SWITCH */
+function showPanel(id) {
+  document.querySelectorAll('.panel').forEach(p => {
+    p.classList.remove('active');
+  });
+
+  const target = document.getElementById(id);
+  if (target) target.classList.add('active');
+}
+
 /* HERO VIDEO FADE */
 const heroVideo = document.getElementById('heroVideo');
-
 const originalShowPanel = window.showPanel;
+
 window.showPanel = function (id) {
   originalShowPanel(id);
 
@@ -37,7 +47,6 @@ window.addEventListener('mousemove', (e) => {
 
 function draw() {
   ctx.clearRect(0, 0, w, h);
-
   const spacing = 24;
 
   for (let x = 0; x < w; x += spacing) {
