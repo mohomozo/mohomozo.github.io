@@ -4,276 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mohammad Mozafari | Multimedia Artist</title>
-  
   <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
-  <style>
-    /* --- RESET & BASIC SETUP --- */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html, body {
-      width: 100%;
-      height: 100%;
-      background: #020202;
-      color: #eaeaea;
-      font-family: 'Inter', sans-serif;
-      overflow: hidden;
-      cursor: crosshair;
-    }
-
-    /* --- FILM GRAIN EFFECT (نویز روی کل صفحه) --- */
-    body::after {
-      content: "";
-      position: fixed;
-      top: -100%;
-      left: -100%;
-      width: 300%;
-      height: 300%;
-      background-image: url("https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Noise_Texture.png");
-      opacity: 0.04;
-      pointer-events: none;
-      z-index: 1000;
-      animation: noise 0.2s infinite;
-    }
-
-    @keyframes noise {
-      0% { transform: translate(0, 0); }
-      10% { transform: translate(-5%, -5%); }
-      20% { transform: translate(-10%, 5%); }
-      30% { transform: translate(5%, -10%); }
-      40% { transform: translate(-5%, 15%); }
-      50% { transform: translate(-10%, 5%); }
-      60% { transform: translate(15%, 0); }
-      70% { transform: translate(0, 10%); }
-      80% { transform: translate(-15%, 0); }
-      90% { transform: translate(10%, 5%); }
-      100% { transform: translate(5%, 0); }
-    }
-
-    /* --- VIDEO BACKGROUND --- */
-    .video-background {
-      position: fixed;
-      inset: 0;
-      z-index: -10;
-      overflow: hidden;
-    }
-
-    .video-background video {
-      min-width: 100%;
-      min-height: 100%;
-      width: auto;
-      height: auto;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      object-fit: cover;
-      opacity: 0.3;
-      filter: contrast(1.2) brightness(0.8);
-      transition: filter 0.8s ease, opacity 0.8s ease;
-    }
-
-    body.blur-mode .video-background video {
-      filter: blur(20px) grayscale(100%);
-      opacity: 0.1;
-    }
-
-    #dotCanvas {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    /* --- NAVIGATION --- */
-    .main-nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1100;
-      padding: 30px;
-      display: flex;
-      justify-content: center;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 30px;
-      background: rgba(255, 255, 255, 0.03);
-      padding: 10px 25px;
-      border-radius: 50px;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .nav-item {
-      color: rgba(255, 255, 255, 0.4);
-      font-family: 'Syncopate', sans-serif;
-      font-size: 10px;
-      letter-spacing: 2px;
-      cursor: pointer;
-      text-transform: uppercase;
-      transition: 0.4s;
-      text-decoration: none;
-    }
-
-    .nav-item:hover, .nav-item.active {
-      color: #fff;
-      text-shadow: 0 0 15px rgba(255,255,255,0.5);
-    }
-
-    /* --- GLITCH HERO TEXT --- */
-    .hero-content {
-      text-align: center;
-      position: relative;
-    }
-
-    .glitch-wrapper {
-      position: relative;
-      display: inline-block;
-    }
-
-    h1.spotlight-text {
-      font-family: 'Syncopate', sans-serif;
-      font-size: clamp(40px, 10vw, 130px);
-      font-weight: 700;
-      letter-spacing: -2px;
-      margin: 0;
-      color: #fff;
-      
-      /* ماسک نوری */
-      -webkit-mask-image: radial-gradient(
-        circle 150px at var(--x, 50%) var(--y, 50%), 
-        black 0%, 
-        rgba(0,0,0,0.2) 70%,
-        transparent 100%
-      );
-      mask-image: radial-gradient(
-        circle 150px at var(--x, 50%) var(--y, 50%), 
-        black 0%, 
-        rgba(0,0,0,0.2) 70%,
-        transparent 100%
-      );
-
-      /* افکت گلیچ لرزشی */
-      animation: glitch-skew 4s infinite linear alternate-reverse;
-    }
-
-    /* افکت لایه‌های رنگی گلیچ (RGB Split) */
-    h1.spotlight-text::before,
-    h1.spotlight-text::after {
-      content: 'MOHOMOZO';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0.8;
-    }
-
-    h1.spotlight-text::before {
-      color: #ff00c1;
-      z-index: -1;
-      animation: glitch-anim 3s infinite linear alternate-reverse;
-      transform: translateX(-2px);
-    }
-
-    h1.spotlight-text::after {
-      color: #00fff9;
-      z-index: -2;
-      animation: glitch-anim2 2s infinite linear alternate-reverse;
-      transform: translateX(2px);
-    }
-
-    @keyframes glitch-anim {
-      0% { clip-path: inset(10% 0 30% 0); }
-      20% { clip-path: inset(60% 0 10% 0); }
-      40% { clip-path: inset(40% 0 50% 0); }
-      60% { clip-path: inset(80% 0 5% 0); }
-      80% { clip-path: inset(10% 0 70% 0); }
-      100% { clip-path: inset(30% 0 20% 0); }
-    }
-
-    @keyframes glitch-anim2 {
-      0% { clip-path: inset(20% 0 40% 0); transform: scale(1.01); }
-      50% { clip-path: inset(50% 0 10% 0); transform: scale(0.99); }
-      100% { clip-path: inset(10% 0 60% 0); transform: scale(1.01); }
-    }
-
-    @keyframes glitch-skew {
-      0% { transform: skew(0deg); }
-      20% { transform: skew(3deg); }
-      21% { transform: skew(-5deg); }
-      40% { transform: skew(0deg); }
-      100% { transform: skew(0deg); }
-    }
-
-    .hero-subtitle {
-      font-family: 'Syncopate', sans-serif;
-      font-size: 10px;
-      letter-spacing: 12px;
-      margin-top: 20px;
-      opacity: 0.5;
-      text-transform: uppercase;
-    }
-
-    /* --- GLASS CONTENT --- */
-    .panel {
-      display: none;
-      width: 100%;
-      height: 100vh;
-      justify-content: center;
-      align-items: center;
-      position: absolute;
-    }
-
-    .panel.active { display: flex; animation: panelIn 1s cubic-bezier(0.19, 1, 0.22, 1) forwards; }
-
-    @keyframes panelIn {
-      from { opacity: 0; filter: blur(10px); transform: scale(1.1); }
-      to { opacity: 1; filter: blur(0); transform: scale(1); }
-    }
-
-    .glass-box {
-      width: 80%;
-      max-width: 900px;
-      height: 70vh;
-      background: rgba(255, 255, 255, 0.02);
-      backdrop-filter: blur(40px);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 4px;
-      padding: 60px;
-      overflow-y: auto;
-    }
-
-    /* استایل گرید تصاویر با افکت هاور گلیچی */
-    .grid-item {
-      position: relative;
-      overflow: hidden;
-      background: #000;
-      border-radius: 2px;
-      aspect-ratio: 1;
-    }
-
-    .grid-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.6;
-      transition: 0.5s;
-      filter: saturate(0);
-    }
-
-    .grid-item:hover img {
-      opacity: 1;
-      filter: saturate(1.2);
-      transform: scale(1.05);
-    }
-  </style>
+  <link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
 
@@ -281,128 +13,87 @@
     <video id="heroVideo" autoplay muted loop playsinline>
       <source src="assets/loop.mp4" type="video/mp4">
     </video>
+    <div class="video-overlay"></div>
   </div>
 
   <canvas id="dotCanvas"></canvas>
 
+  <div id="lightbox" class="lightbox">
+    <span class="close-btn" onclick="closeLightbox()">×</span>
+    <div class="lightbox-content">
+      <img id="lightbox-img" src="" alt="Project Detail">
+      <div class="lightbox-info">
+        <h3 id="lightbox-title">Project Title</h3>
+        <p id="lightbox-desc">Project description goes here.</p>
+      </div>
+    </div>
+  </div>
+
   <nav class="main-nav">
     <div class="nav-links">
-      <div class="nav-item active" onclick="showPanel('home')">Start</div>
-      <div class="nav-item" onclick="showPanel('about')">Identity</div>
-      <div class="nav-item" onclick="showPanel('portfolio')">Archive</div>
-      <div class="nav-item" onclick="showPanel('wip')">Process</div>
+      <a class="nav-item active" onclick="switchTab('home')">Home</a>
+      <a class="nav-item" onclick="switchTab('about')">About</a>
+      <a class="nav-item" onclick="switchTab('portfolio')">Portfolio</a>
+      <a class="nav-item" onclick="switchTab('work')">W.I.P</a>
     </div>
   </nav>
 
   <main id="main-container">
-    <section id="home" class="panel active">
-      <div class="hero-content">
-        <div class="glitch-wrapper">
-          <h1 class="spotlight-text" id="heroTitle">MOHOMOZO</h1>
-        </div>
-        <p class="hero-subtitle">Visual Explorer / Multimedia</p>
+
+    <section id="home" class="panel active-panel">
+      <div class="hero-text">
+        <h1>MOHOMOZO</h1>
+        <p class="hero-name">Mohammad Mozafari</p>
+        <p class="hero-subtitle">Experimental Multimedia Artist</p>
       </div>
     </section>
 
     <section id="about" class="panel">
-      <div class="glass-box">
-        <h2 style="font-family:Syncopate; font-size:14px; letter-spacing:5px; margin-bottom:30px; color:#fff">IDENTITY_STATEMENT</h2>
-        <p style="line-height:2; font-size:14px; color:#aaa; max-width:600px">
-          Mohammad Mozafari is an experimental multimedia artist. His practice is a continuous glitch in the perception of reality, moving through animation, painting, and digital noise.
-        </p>
+      <div class="glass-card content-scroll">
+        <div class="text-block">
+          <h2>Artist Bio</h2>
+          <p>Mohammad Mozafari is an experimental multimedia artist whose practice spans animation, painting, illustration, theater-based video production, and conceptual video art. His work explores emotional states, subconscious narratives, and the tension between personal identity and collective experience.</p>
+        </div>
+        
+        <div class="divider"></div>
+
+        <div class="text-block">
+          <h2>Artist Statement</h2>
+          <p>My work operates at the intersection of emotion, memory, and experimental form. I move freely between mediums because each material reveals a different layer of meaning. I build hybrid visual languages that invite viewers to feel ideas before fully understanding them.</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="text-block">
+          <h2>Approach & Process</h2>
+          <p>I approach each project as an open experiment. Improvisation, intuition, and material exploration guide my process. Accidents and unexpected outcomes often become the core of the final work.</p>
+        </div>
       </div>
     </section>
 
     <section id="portfolio" class="panel">
-      <div class="glass-box">
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px;" id="portfolioGrid"></div>
+      <div class="glass-card full-width">
+        <div class="portfolio-menu">
+          <button onclick="filterPortfolio('all')" class="active-filter">All</button>
+          <button onclick="filterPortfolio('painting')">Painting</button>
+          <button onclick="filterPortfolio('illustration')">Illustration</button>
+          <button onclick="filterPortfolio('animation')">Animation</button>
+        </div>
+        
+        <div class="portfolio-grid" id="portfolio-grid"></div>
       </div>
     </section>
 
-    <section id="wip" class="panel">
-      <div class="glass-box">
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px;" id="wipGrid"></div>
+    <section id="work" class="panel">
+      <div class="glass-card full-width">
+        <h2>Ongoing Projects</h2>
+        <p style="margin-bottom: 2rem; opacity: 0.7;">Behind the scenes and experimental sketches.</p>
+        <div class="portfolio-grid" id="wip-grid"></div>
       </div>
     </section>
+
   </main>
 
-  <script>
-    // --- 1. SPOTLIGHT & MOUSE INTERACTION ---
-    const heroTitle = document.getElementById('heroTitle');
-    document.addEventListener('mousemove', (e) => {
-      const xPercent = (e.clientX / window.innerWidth) * 100;
-      const yPercent = (e.clientY / window.innerHeight) * 100;
-      
-      if(heroTitle) {
-        heroTitle.style.setProperty('--x', `${xPercent}%`);
-        heroTitle.style.setProperty('--y', `${yPercent}%`);
-      }
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-    });
-
-    // --- 2. LOOPING DOT PHYSICS (برگرفته از نسخه قبل با تنظیمات نویزی) ---
-    const canvas = document.getElementById('dotCanvas');
-    const ctx = canvas.getContext('2d');
-    let w, h, dots = [];
-    let mouse = { x: -1000, y: -1000 }, trail = { x: 0, y: 0 };
-
-    function resize() {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
-      dots = [];
-      for(let x = 0; x < w; x += 40) {
-        for(let y = 0; y < h; y += 40) {
-          dots.push({x, y, baseX: x, baseY: y, size: Math.random() * 1.5});
-        }
-      }
-    }
-
-    function animate() {
-      ctx.clearRect(0, 0, w, h);
-      trail.x += (mouse.x - trail.x) * 0.08;
-      trail.y += (mouse.y - trail.y) * 0.08;
-
-      dots.forEach(d => {
-        const dx = trail.x - d.x;
-        const dy = trail.y - d.y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
-        const force = Math.max(0, 1 - dist/250);
-        
-        ctx.beginPath();
-        // نقطه‌ها در حضور موس کمی می‌لرزند (Glitchy movement)
-        const jitter = force * (Math.random() * 2);
-        ctx.arc(d.x + jitter, d.y + jitter, d.size + (force * 2), 0, Math.PI*2);
-        ctx.fillStyle = `rgba(255,255,255,${0.1 + force * 0.5})`;
-        ctx.fill();
-      });
-      requestAnimationFrame(animate);
-    }
-
-    window.addEventListener('resize', resize);
-    resize();
-    animate();
-
-    // --- 3. UI LOGIC ---
-    function showPanel(id) {
-      document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
-      event?.target.classList.add('active');
-      
-      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      
-      document.body.classList.toggle('blur-mode', id !== 'home');
-    }
-
-    // Dummy Data
-    const data = Array(8).fill({src: 'https://images.unsplash.com/photo-1633167606207-d840b5070fc2?auto=format&fit=crop&w=400'});
-    const grid = document.getElementById('portfolioGrid');
-    data.forEach(item => {
-      const div = document.createElement('div');
-      div.className = 'grid-item';
-      div.innerHTML = `<img src="${item.src}">`;
-      grid.appendChild(div);
-    });
-  </script>
+  <script src="JS/main.js"></script>
 </body>
 </html>
