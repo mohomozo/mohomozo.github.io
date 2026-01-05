@@ -18,9 +18,11 @@ function handleHeroState(id) {
   if (id === 'home' || id === 'about') {
     hero.style.opacity = '1';
     hero.style.filter = 'none';
+    hero.style.display = 'block';
   } else {
     hero.style.opacity = '0.12';
     hero.style.filter = 'blur(2px) grayscale(100%)';
+    hero.style.display = 'block';
   }
 }
 
