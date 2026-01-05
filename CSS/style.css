@@ -19,14 +19,15 @@ html, body {
 #dotCanvas {
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: -3;
   pointer-events: none;
 }
 
 /* HERO */
 .hero {
-  position: relative;
-  height: 100vh;
+  position: fixed;
+  inset: 0;
+  z-index: -2;
   overflow: hidden;
 }
 
@@ -114,10 +115,13 @@ html, body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 6rem 2rem;
+  position: relative;
+  z-index: 2;
 }
 
 .panel {
   display: none;
+  padding-bottom: 6rem;
 }
 
 .panel.active {
@@ -154,12 +158,17 @@ html, body {
   gap: 2rem;
 }
 
-/* CARD */
+/* CARD GLASS */
 .project-card {
   position: relative;
   aspect-ratio: 4 / 5;
   overflow: hidden;
   cursor: pointer;
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  transition: transform 0.3s ease;
 }
 
 .project-card img {
@@ -209,14 +218,15 @@ html, body {
   font-size: 2rem;
   cursor: pointer;
 }
-.hero {
-  position: fixed;
-  inset: 0;
-  z-index: -2;
+
+.lightbox img,
+.lightbox video {
+  max-width: 90%;
+  margin: 2rem auto;
+  display: block;
 }
 
-main {
-  position: relative;
-  z-index: 2;
+#lightbox-media-container {
+  max-width: 1000px;
+  margin: auto;
 }
-
