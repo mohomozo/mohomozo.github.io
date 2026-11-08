@@ -4,7 +4,6 @@ function switchTab(tabId) {
   const navLinks = document.querySelectorAll('.nav-item');
   navLinks.forEach(link => {
     link.classList.remove('active');
-    // چک کردن متنی یا اگر آیدی داشت
     if(link.getAttribute('onclick').includes(tabId)) {
       link.classList.add('active');
     }
@@ -14,11 +13,13 @@ function switchTab(tabId) {
   const panels = document.querySelectorAll('.panel');
   panels.forEach(panel => {
     panel.classList.remove('active-panel');
+    panel.style.display = 'none';
   });
   
   const targetPanel = document.getElementById(tabId);
   if(targetPanel) {
     targetPanel.classList.add('active-panel');
+    targetPanel.style.display = 'block';
   }
 
   // ج) مدیریت ویدیو بک‌گراند
@@ -31,14 +32,18 @@ function switchTab(tabId) {
 }
 
 // --- 2. PORTFOLIO DATA & GENERATION ---
-// دیتای نمونه (می‌توانی عکس‌های خودت را جایگزین کنی)
+// اینجا پروژه‌های شما قرار دارند
 const projects = [
-  { id: 1, type: 'painting', title: 'Abstract Fear', img: 'https://source.unsplash.com/random/500x500/?abstract,art', desc: 'Oil on Canvas, 2024' },
-  { id: 2, type: 'animation', title: 'Loop 01', img: 'https://source.unsplash.com/random/500x500/?digital,3d', desc: 'Blender 3D Loop' },
-  { id: 3, type: 'illustration', title: 'Character Study', img: 'https://source.unsplash.com/random/500x500/?drawing', desc: 'Digital Sketch' },
-  { id: 4, type: 'painting', title: 'Silence', img: 'https://source.unsplash.com/random/500x500/?paint', desc: 'Acrylic' },
-  { id: 5, type: 'animation', title: 'Nightmare', img: 'https://source.unsplash.com/random/500x500/?dark,art', desc: 'Stop Motion' },
-  { id: 6, type: 'illustration', title: 'Faces', img: 'https://source.unsplash.com/random/500x500/?face,art', desc: 'Charcoal' }
+  // یک نمونه برای نقاشی (بعداً عکس‌های خودت رو جایگزین این کن)
+  { id: 1, type: 'painting', title: 'کالبد پذیرش', img: 'assets/kalbod.jpg', desc: 'Painting' },
+  
+  // انیمیشن‌های شما (لینک‌های گوگل درایو)
+  { id: 2, type: 'animation', title: 'Random things', desc: 'Animation (2023)', mediaType: 'iframe', aspectRatio: '16/9', url: 'https://drive.google.com/file/d/1tFMsgqX_5e_MynEWivfFGB3rhiW97ynd/preview' },
+  { id: 3, type: 'animation', title: 'mindset', desc: 'Animation (2023)', mediaType: 'iframe', aspectRatio: '16/9', url: 'https://drive.google.com/file/d/1zoG3dlY9RznrLbiKu2j7BRUnW9_RnrG5/preview' },
+  { id: 4, type: 'animation', title: 'sun', desc: 'Animation (2023)', mediaType: 'iframe', aspectRatio: '16/9', url: 'https://drive.google.com/file/d/1pLBsMpOfb_UruBAgs3CZM80v6O7hRLw6/preview' },
+  { id: 5, type: 'animation', title: 'Dream loop', desc: 'Animation (2022)', mediaType: 'iframe', aspectRatio: '16/9', url: 'https://drive.google.com/file/d/1YAQ90R6n5OdksyU_S3G7Xj95abiRqQpB/preview' },
+  { id: 6, type: 'animation', title: 'The Dance', desc: 'Animation (2021)', mediaType: 'iframe', aspectRatio: '16/9', url: 'https://drive.google.com/file/d/1ndP1pEhpyB-1y8XFn2blo5g1IANHXpYt/preview' },
+  { id: 7, type: 'animation', title: 'Remembering', desc: 'Animation (2023)', mediaType: 'iframe', aspectRatio: '16/9', url: 'https://drive.google.com/file/d/1POqQBuDXrf98p_7oLfgOyziuNwn6IeUM/preview' }
 ];
 
 const portfolioGrid = document.getElementById('portfolio-grid');
@@ -55,14 +60,30 @@ function renderPortfolio(filter = 'all') {
   filtered.forEach(p => {
     const item = document.createElement('div');
     item.className = 'project-item';
-    item.onclick = () => openLightbox(p);
-    item.innerHTML = `
-      <img src="${p.img}" alt="${p.title}">
-      <div class="project-overlay">
-        <h3 style="font-family: 'Syncopate'; font-size: 0.9rem; margin-bottom:0.5rem">${p.title}</h3>
-        <p style="font-size: 0.7rem; opacity:0.8">${p.type.toUpperCase()}</p>
-      </div>
-    `;
+    item.style.position = 'relative';
+    item.style.marginBottom = '20px';
+
+    if (p.mediaType === 'iframe') {
+      // کدهای نمایش ویدیوهای گوگل درایو
+      item.innerHTML = `
+        <iframe style="aspect-ratio: ${p.aspectRatio}; width: 100%; border: none; border-radius: 8px;" src="${p.url}" allow="autoplay; fullscreen"></iframe>
+        <div class="project-overlay" style="pointer-events: none;">
+          <h3 style="font-family: 'Syncopate'; font-size: 0.9rem; margin-bottom:0.5rem">${p.title}</h3>
+          <p style="font-size: 0.7rem; opacity:0.8">${p.desc}</p>
+        </div>
+      `;
+    } else {
+      // کدهای نمایش عکس‌ها
+      item.onclick = () => openLightbox(p);
+      item.innerHTML = `
+        <img src="${p.img}" alt="${p.title}" style="width: 100%; border-radius: 8px;">
+        <div class="project-overlay">
+          <h3 style="font-family: 'Syncopate'; font-size: 0.9rem; margin-bottom:0.5rem">${p.title}</h3>
+          <p style="font-size: 0.7rem; opacity:0.8">${p.desc}</p>
+        </div>
+      `;
+    }
+    
     portfolioGrid.appendChild(item);
   });
 }
@@ -71,7 +92,9 @@ function filterPortfolio(type) {
   // آپدیت دکمه‌های فیلتر
   const buttons = document.querySelectorAll('.portfolio-menu button');
   buttons.forEach(btn => btn.classList.remove('active-filter'));
-  event.target.classList.add('active-filter');
+  
+  const clickedBtn = document.querySelector(`.portfolio-menu button[onclick="filterPortfolio('${type}')"]`);
+  if(clickedBtn) clickedBtn.classList.add('active-filter');
 
   renderPortfolio(type);
 }
@@ -121,7 +144,7 @@ window.addEventListener('mousemove', (e) => {
 
 function drawDots() {
   ctx.clearRect(0, 0, w, h);
-  const spacing = 30; // فاصله نقطه ها
+  const spacing = 30;
 
   for (let x = 0; x < w; x += spacing) {
     for (let y = 0; y < h; y += spacing) {
@@ -129,13 +152,11 @@ function drawDots() {
       const dy = mouse.y - y;
       const dist = Math.sqrt(dx * dx + dy * dy);
       
-      // شعاع تاثیر موس
       const maxDist = 200;
       const strength = Math.max(0, 1 - dist / maxDist);
 
       if (strength > 0) {
         ctx.beginPath();
-        // نقطه‌ها فقط نزدیک موس بزرگ میشن
         const size = 1 + (strength * 3); 
         ctx.arc(x, y, size, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(255, 255, 255, ${strength * 0.4})`;
