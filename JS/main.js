@@ -1,6 +1,5 @@
 // --- 1. NAVIGATION & PANELS ---
 function switchTab(tabId) {
-  // الف) آپدیت کلاس اکتیو منو
   const navLinks = document.querySelectorAll('.nav-item');
   navLinks.forEach(link => {
     link.classList.remove('active');
@@ -9,7 +8,6 @@ function switchTab(tabId) {
     }
   });
 
-  // ب) نمایش پنل مربوطه
   const panels = document.querySelectorAll('.panel');
   panels.forEach(panel => {
     panel.classList.remove('active-panel');
@@ -22,28 +20,26 @@ function switchTab(tabId) {
     targetPanel.style.display = 'block';
   }
 
-  // ج) مدیریت ویدیو بک‌گراند
   const body = document.body;
   if (tabId === 'home') {
-    body.classList.remove('view-detail'); // ویدیو واضح
+    body.classList.remove('view-detail'); 
   } else {
-    body.classList.add('view-detail'); // ویدیو تار و محو
+    body.classList.add('view-detail'); 
   }
 }
 
-// --- 2. PORTFOLIO DATA & GENERATION ---
-// اینجا پروژه‌های شما قرار دارند
+// --- 2. PORTFOLIO DATA ---
 const projects = [
-  // یک نمونه برای نقاشی (بعداً عکس‌های خودت رو جایگزین این کن)
-  { id: 1, type: 'painting', title: 'کالبد پذیرش', img: 'assets/kalbod.jpg', desc: 'Painting' },
+  // کارهای نقاشی
+  { id: 1, type: 'painting', title: 'کالبد پذیرش', desc: 'Painting', img: 'assets/kalbod.jpg' },
   
-  // انیمیشن‌های شما (لینک‌های گوگل درایو)
-  { id: 2, type: 'animation', title: 'Random things', desc: 'Animation (2023)', mediaType: 'iframe', aspectRatio: '16/9', url: 'https://drive.google.com/file/d/1tFMsgqX_5e_MynEWivfFGB3rhiW97ynd/preview' },
-  { id: 3, type: 'animation', title: 'mindset', desc: 'Animation (2023)', mediaType: 'iframe', aspectRatio: '16/9', url: 'https://drive.google.com/file/d/1zoG3dlY9RznrLbiKu2j7BRUnW9_RnrG5/preview' },
-  { id: 4, type: 'animation', title: 'sun', desc: 'Animation (2023)', mediaType: 'iframe', aspectRatio: '16/9', url: 'https://drive.google.com/file/d/1pLBsMpOfb_UruBAgs3CZM80v6O7hRLw6/preview' },
-  { id: 5, type: 'animation', title: 'Dream loop', desc: 'Animation (2022)', mediaType: 'iframe', aspectRatio: '16/9', url: 'https://drive.google.com/file/d/1YAQ90R6n5OdksyU_S3G7Xj95abiRqQpB/preview' },
-  { id: 6, type: 'animation', title: 'The Dance', desc: 'Animation (2021)', mediaType: 'iframe', aspectRatio: '16/9', url: 'https://drive.google.com/file/d/1ndP1pEhpyB-1y8XFn2blo5g1IANHXpYt/preview' },
-  { id: 7, type: 'animation', title: 'Remembering', desc: 'Animation (2023)', mediaType: 'iframe', aspectRatio: '16/9', url: 'https://drive.google.com/file/d/1POqQBuDXrf98p_7oLfgOyziuNwn6IeUM/preview' }
+  // انیمیشن‌ها (بخش img را با آدرس عکس کاور مربعی خودت جایگزین کن)
+  { id: 2, type: 'animation', title: 'Random things', desc: 'Animation (2023)', mediaType: 'iframe', aspectRatio: '16/9', url: 'https://drive.google.com/file/d/1tFMsgqX_5e_MynEWivfFGB3rhiW97ynd/preview', img: 'assets/cover-random.jpg' },
+  { id: 3, type: 'animation', title: 'mindset', desc: 'Animation (2023)', mediaType: 'iframe', aspectRatio: '16/9', url: 'https://drive.google.com/file/d/1zoG3dlY9RznrLbiKu2j7BRUnW9_RnrG5/preview', img: 'assets/cover-mindset.jpg' },
+  { id: 4, type: 'animation', title: 'sun', desc: 'Animation (2023)', mediaType: 'iframe', aspectRatio: '16/9', url: 'https://drive.google.com/file/d/1pLBsMpOfb_UruBAgs3CZM80v6O7hRLw6/preview', img: 'assets/cover-sun.jpg' },
+  { id: 5, type: 'animation', title: 'Dream loop', desc: 'Animation (2022)', mediaType: 'iframe', aspectRatio: '1/1', url: 'https://drive.google.com/file/d/1YAQ90R6n5OdksyU_S3G7Xj95abiRqQpB/preview', img: 'assets/cover-dream.jpg' },
+  { id: 6, type: 'animation', title: 'The Dance', desc: 'Animation (2021)', mediaType: 'iframe', aspectRatio: '16/9', url: 'https://drive.google.com/file/d/1ndP1pEhpyB-1y8XFn2blo5g1IANHXpYt/preview', img: 'assets/cover-dance.jpg' },
+  { id: 7, type: 'animation', title: 'Remembering', desc: 'Animation (2023)', mediaType: 'iframe', aspectRatio: '16/9', url: 'https://drive.google.com/file/d/1POqQBuDXrf98p_7oLfgOyziuNwn6IeUM/preview', img: 'assets/cover-remember.jpg' }
 ];
 
 const portfolioGrid = document.getElementById('portfolio-grid');
@@ -51,7 +47,7 @@ const portfolioGrid = document.getElementById('portfolio-grid');
 function renderPortfolio(filter = 'all') {
   if(!portfolioGrid) return;
   
-  portfolioGrid.innerHTML = ''; // پاک کردن قبلی‌ها
+  portfolioGrid.innerHTML = ''; 
 
   const filtered = filter === 'all' 
     ? projects 
@@ -62,34 +58,25 @@ function renderPortfolio(filter = 'all') {
     item.className = 'project-item';
     item.style.position = 'relative';
     item.style.marginBottom = '20px';
-
-    if (p.mediaType === 'iframe') {
-      // کدهای نمایش ویدیوهای گوگل درایو
-      item.innerHTML = `
-        <iframe style="aspect-ratio: ${p.aspectRatio}; width: 100%; border: none; border-radius: 8px;" src="${p.url}" allow="autoplay; fullscreen"></iframe>
-        <div class="project-overlay" style="pointer-events: none;">
-          <h3 style="font-family: 'Syncopate'; font-size: 0.9rem; margin-bottom:0.5rem">${p.title}</h3>
-          <p style="font-size: 0.7rem; opacity:0.8">${p.desc}</p>
-        </div>
-      `;
-    } else {
-      // کدهای نمایش عکس‌ها
-      item.onclick = () => openLightbox(p);
-      item.innerHTML = `
-        <img src="${p.img}" alt="${p.title}" style="width: 100%; border-radius: 8px;">
-        <div class="project-overlay">
-          <h3 style="font-family: 'Syncopate'; font-size: 0.9rem; margin-bottom:0.5rem">${p.title}</h3>
-          <p style="font-size: 0.7rem; opacity:0.8">${p.desc}</p>
-        </div>
-      `;
-    }
+    item.style.cursor = 'pointer';
+    item.onclick = () => openLightbox(p);
     
+    // کادر مربعی یکدست برای همه کارها در گالری با استفاده از عکس کاور
+    // اگر عکسی لود نشد، یک پس‌زمینه خاکستری نشان می‌دهد
+    item.innerHTML = `
+      <div style="width: 100%; aspect-ratio: 1/1; overflow: hidden; border-radius: 8px; background: #333;">
+        <img src="${p.img}" alt="${p.title}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'">
+      </div>
+      <div class="project-overlay" style="pointer-events: none;">
+        <h3 style="font-family: 'Syncopate'; font-size: 0.9rem; margin-bottom:0.5rem">${p.title}</h3>
+        <p style="font-size: 0.7rem; opacity:0.8">${p.desc}</p>
+      </div>
+    `;
     portfolioGrid.appendChild(item);
   });
 }
 
 function filterPortfolio(type) {
-  // آپدیت دکمه‌های فیلتر
   const buttons = document.querySelectorAll('.portfolio-menu button');
   buttons.forEach(btn => btn.classList.remove('active-filter'));
   
@@ -99,7 +86,6 @@ function filterPortfolio(type) {
   renderPortfolio(type);
 }
 
-// Render Initial Projects
 renderPortfolio('all');
 
 
@@ -110,9 +96,23 @@ const lbTitle = document.getElementById('lightbox-title');
 const lbDesc = document.getElementById('lightbox-desc');
 
 function openLightbox(project) {
-  lbImg.src = project.img;
   lbTitle.innerText = project.title;
   lbDesc.innerText = project.desc;
+  
+  // پاک کردن ویدیوی قبلی (اگر بود) تا صدا روی هم نیفتد
+  const oldMedia = document.getElementById('lightbox-media');
+  if(oldMedia) oldMedia.remove();
+
+  if (project.mediaType === 'iframe') {
+    // مخفی کردن عکس پیش‌فرض لایت‌باکس و ساخت پخش‌کننده ویدیو
+    lbImg.style.display = 'none';
+    const iframeHTML = `<iframe id="lightbox-media" style="width: 100%; aspect-ratio: ${project.aspectRatio}; border: none; border-radius: 8px; margin-bottom: 15px;" src="${project.url}" allow="autoplay; fullscreen"></iframe>`;
+    document.querySelector('.lightbox-info').insertAdjacentHTML('beforebegin', iframeHTML);
+  } else {
+    // حالت عادی برای نقاشی‌ها
+    lbImg.style.display = 'block';
+    lbImg.src = project.img;
+  }
   
   lightbox.style.display = 'flex';
   setTimeout(() => { lightbox.classList.add('active'); }, 10);
@@ -120,11 +120,16 @@ function openLightbox(project) {
 
 function closeLightbox() {
   lightbox.classList.remove('active');
-  setTimeout(() => { lightbox.style.display = 'none'; }, 300);
+  setTimeout(() => { 
+    lightbox.style.display = 'none'; 
+    // متوقف کردن ویدیو هنگام بستن پنجره
+    const media = document.getElementById('lightbox-media');
+    if(media) media.remove();
+  }, 300);
 }
 
 
-// --- 4. DOT SHADER (Mouse Effect) ---
+// --- 4. DOT SHADER ---
 const canvas = document.getElementById('dotCanvas');
 const ctx = canvas.getContext('2d');
 let w, h;
