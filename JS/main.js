@@ -99,35 +99,34 @@ function openLightbox(project) {
   lbTitle.innerText = project.title;
   lbDesc.innerText = project.desc;
   
-  // پاک کردن ویدیوی قبلی (اگر بود) تا صدا روی هم نیفتد
+  // پیدا کردن بدنه اصلی لایت‌باکس
+  const lightboxContent = document.querySelector('.lightbox-content');
+  
   const oldMedia = document.getElementById('lightbox-media');
   if(oldMedia) oldMedia.remove();
 
   if (project.mediaType === 'iframe') {
-    // مخفی کردن عکس پیش‌فرض لایت‌باکس و ساخت پخش‌کننده ویدیو
     lbImg.style.display = 'none';
-    const iframeHTML = `<iframe id="lightbox-media" style="width: 100%; aspect-ratio: ${project.aspectRatio}; border: none; border-radius: 8px; margin-bottom: 15px;" src="${project.url}" allow="autoplay; fullscreen"></iframe>`;
+    
+    // بزرگ کردن پنجره تا ۹۰ درصد عرض مانیتور برای ویدیوها
+    lightboxContent.style.width = '90vw';
+    lightboxContent.style.maxWidth = '1200px'; 
+    
+    // اضافه کردن محدودیت ارتفاع (max-height) تا از صفحه بیرون نزند
+    const iframeHTML = `<iframe id="lightbox-media" style="width: 100%; max-height: 75vh; aspect-ratio: ${project.aspectRatio}; border: none; border-radius: 8px; margin-bottom: 15px;" src="${project.url}" allow="autoplay; fullscreen"></iframe>`;
     document.querySelector('.lightbox-info').insertAdjacentHTML('beforebegin', iframeHTML);
   } else {
-    // حالت عادی برای نقاشی‌ها
     lbImg.style.display = 'block';
     lbImg.src = project.img;
+    
+    // برگرداندن سایز به حالت نرمال برای نقاشی‌ها
+    lightboxContent.style.width = '90%';
+    lightboxContent.style.maxWidth = '600px'; 
   }
   
   lightbox.style.display = 'flex';
   setTimeout(() => { lightbox.classList.add('active'); }, 10);
 }
-
-function closeLightbox() {
-  lightbox.classList.remove('active');
-  setTimeout(() => { 
-    lightbox.style.display = 'none'; 
-    // متوقف کردن ویدیو هنگام بستن پنجره
-    const media = document.getElementById('lightbox-media');
-    if(media) media.remove();
-  }, 300);
-}
-
 
 // --- 4. DOT SHADER ---
 const canvas = document.getElementById('dotCanvas');
