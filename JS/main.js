@@ -28,16 +28,23 @@ function switchTab(tabId) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+// استخراج خودکار تصویر کاور از لینک گوگل درایو
+function getDriveThumbnail(url) {
+  if (!url) return '';
+  const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+  return match ? `https://drive.google.com/thumbnail?id=${match[1]}&sz=w1000` : '';
+}
+
 // --- 2. PORTFOLIO DATA ---
 const projects = [
   { id: 1, type: 'painting', title: 'کالبد پذیرش', desc: 'Painting', img: 'assets/kalbod.jpg' },
 
-  { id: 2, type: 'animation', title: 'Random things', desc: 'Animation (2023)', mediaType: 'iframe', aspectRatio: '16/9', url: 'https://drive.google.com/file/d/1tFMsgqX_5e_MynEWivfFGB3rhiW97ynd/preview', img: 'assets/cover-random.jpg' },
-  { id: 3, type: 'animation', title: 'mindset', desc: 'Animation (2023)', mediaType: 'iframe', aspectRatio: '16/9', url: 'https://drive.google.com/file/d/1zoG3dlY9RznrLbiKu2j7BRUnW9_RnrG5/preview', img: 'assets/cover-mindset.jpg' },
-  { id: 4, type: 'animation', title: 'sun', desc: 'Animation (2023)', mediaType: 'iframe', aspectRatio: '16/9', url: 'https://drive.google.com/file/d/1pLBsMpOfb_UruBAgs3CZM80v6O7hRLw6/preview', img: 'assets/cover-sun.jpg' },
-  { id: 5, type: 'animation', title: 'Dream loop', desc: 'Animation (2022)', mediaType: 'iframe', aspectRatio: '1/1', url: 'https://drive.google.com/file/d/1YAQ90R6n5OdksyU_S3G7Xj95abiRqQpB/preview', img: 'assets/cover-dream.jpg' },
-  { id: 6, type: 'animation', title: 'The Dance', desc: 'Animation (2021)', mediaType: 'iframe', aspectRatio: '16/9', url: 'https://drive.google.com/file/d/1ndP1pEhpyB-1y8XFn2blo5g1IANHXpYt/preview', img: 'assets/cover-dance.jpg' },
-  { id: 7, type: 'animation', title: 'Remembering', desc: 'Animation (2023)', mediaType: 'iframe', aspectRatio: '16/9', url: 'https://drive.google.com/file/d/1POqQBuDXrf98p_7oLfgOyziuNwn6IeUM/preview', img: 'assets/cover-remember.jpg' }
+  { id: 2, type: 'animation', title: 'Random things', desc: 'Animation (2023)', mediaType: 'iframe', aspectRatio: '16/9', url: 'https://drive.google.com/file/d/1tFMsgqX_5e_MynEWivfFGB3rhiW97ynd/preview' },
+  { id: 3, type: 'animation', title: 'mindset', desc: 'Animation (2023)', mediaType: 'iframe', aspectRatio: '16/9', url: 'https://drive.google.com/file/d/1zoG3dlY9RznrLbiKu2j7BRUnW9_RnrG5/preview' },
+  { id: 4, type: 'animation', title: 'sun', desc: 'Animation (2023)', mediaType: 'iframe', aspectRatio: '16/9', url: 'https://drive.google.com/file/d/1pLBsMpOfb_UruBAgs3CZM80v6O7hRLw6/preview' },
+  { id: 5, type: 'animation', title: 'Dream loop', desc: 'Animation (2022)', mediaType: 'iframe', aspectRatio: '1/1', url: 'https://drive.google.com/file/d/1YAQ90R6n5OdksyU_S3G7Xj95abiRqQpB/preview' },
+  { id: 6, type: 'animation', title: 'The Dance', desc: 'Animation (2021)', mediaType: 'iframe', aspectRatio: '16/9', url: 'https://drive.google.com/file/d/1ndP1pEhpyB-1y8XFn2blo5g1IANHXpYt/preview' },
+  { id: 7, type: 'animation', title: 'Remembering', desc: 'Animation (2023)', mediaType: 'iframe', aspectRatio: '16/9', url: 'https://drive.google.com/file/d/1POqQBuDXrf98p_7oLfgOyziuNwn6IeUM/preview' }
 ];
 
 const portfolioGrid = document.getElementById('portfolio-grid');
@@ -56,8 +63,13 @@ function renderPortfolio(filter = 'all') {
     item.className = 'project-item';
     item.onclick = () => openLightbox(p);
 
+    // اگر عکس اختصاصی نداشت و ویدیوی درایو بود، خودش کاور ویدیو رو میاره
+    const coverSrc = p.img || (p.mediaType === 'iframe' ? getDriveThumbnail(p.url) : '');
+    const playIcon = p.mediaType === 'iframe' ? '<span class="play-badge">▶</span>' : '';
+
     item.innerHTML = `
-      <img src="${p.img}" alt="${p.title}" onerror="this.style.display='none'">
+      <img src="${coverSrc}" alt="${p.title}" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
+      ${playIcon}
       <div class="project-overlay">
         <h3>${p.title}</h3>
         <p>${p.desc}</p>
@@ -122,7 +134,6 @@ function closeLightbox() {
   }, 250);
 }
 
-// بستن پنجره با کلید Escape
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && lightbox.classList.contains('active')) {
     closeLightbox();
