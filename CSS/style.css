@@ -132,7 +132,8 @@ body.view-detail .video-overlay {
   from { opacity: 0; transform: translateY(14px); }
   to { opacity: 1; transform: translateY(0); }
 }
-/* --- HOME HERO --- */
+
+/* --- HOME HERO (TRANSPARENT STYLE) --- */
 #home.active-panel {
   min-height: calc(100vh - 160px);
   display: flex;
@@ -141,28 +142,14 @@ body.view-detail .video-overlay {
   text-align: center;
 }
 
-.hero-text {
-  mix-blend-mode: difference; /* باعث می‌شود متن مثل آینه با رنگ‌های ویدیوی پشتش واکنش بدهد */
-}
-
 .hero-text h1 {
   font-family: 'Syncopate', sans-serif;
   font-size: clamp(2.1rem, 8vw, 5.2rem);
   font-weight: 700;
   letter-spacing: 0.16em;
-  margin-bottom: 18px;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.95) 0%,
-    rgba(255, 255, 255, 0.45) 48%,
-    rgba(255, 255, 255, 0.88) 54%,
-    rgba(180, 185, 200, 0.28) 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-box-reflect: below -10px linear-gradient(transparent 35%, rgba(255, 255, 255, 0.22));
-  filter: drop-shadow(0 6px 24px rgba(255, 255, 255, 0.14));
+  margin-bottom: 14px;
+  color: rgba(255, 255, 255, 0.14);
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.75);
 }
 
 .hero-name {
@@ -170,10 +157,7 @@ body.view-detail .video-overlay {
   font-weight: 400;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.45) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: rgba(255, 255, 255, 0.68);
   margin-bottom: 6px;
 }
 
@@ -182,8 +166,8 @@ body.view-detail .video-overlay {
   font-weight: 300;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.65);
-}}
+  color: rgba(255, 255, 255, 0.45);
+}
 
 /* --- GLASS CARD --- */
 .glass-card {
@@ -326,28 +310,55 @@ body.view-detail .video-overlay {
   color: rgba(255, 255, 255, 0.75);
 }
 
-/* --- W.I.P (ANIMATORE) --- */
+.play-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(10, 10, 14, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 2px;
+  pointer-events: none;
+}
+
+/* --- W.I.P (ANIMATORE - FULL WIDTH) --- */
+#work.panel {
+  max-width: 100%;
+}
+
 .wip-showcase {
-  max-width: 860px;
+  width: 100%;
+  max-width: 1440px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 28px;
 }
+
 .wip-video-wrapper {
+  position: relative;
   width: 100%;
-  max-width: 860px;
-  margin: 0 auto;
-  aspect-ratio: 4 / 3;
+  height: 78vh;
+  min-height: 380px;
   border-radius: 18px;
   overflow: hidden;
-  background: rgba(0, 0, 0, 0.6);
+  background: #000000;
   border: 1px solid rgba(255, 255, 255, 0.16);
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
 }
-}
 
 .wip-video-wrapper iframe {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   border: none;
@@ -617,6 +628,12 @@ body.view-detail .video-overlay {
     font-size: 0.65rem;
   }
 
+  .wip-video-wrapper {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+  }
+
   .lightbox {
     padding: 68px 12px 16px;
   }
@@ -625,23 +642,4 @@ body.view-detail .video-overlay {
     width: 100% !important;
     padding: 12px;
   }
-}
-.play-badge {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: rgba(10, 10, 14, 0.55);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  color: #ffffff;
-  font-size: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-left: 2px;
-  pointer-events: none;
 }
