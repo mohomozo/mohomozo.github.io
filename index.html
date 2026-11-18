@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mohammad Mozafari | Multimedia Artist</title>
-  <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
@@ -18,8 +18,9 @@
 
   <canvas id="dotCanvas"></canvas>
 
-  <div id="lightbox" class="lightbox">
-    <span class="close-btn" onclick="closeLightbox()">×</span>
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" onclick="if(event.target === this) closeLightbox()">
+    <button type="button" class="close-btn" onclick="closeLightbox()" aria-label="Close">×</button>
     <div class="lightbox-content">
       <img id="lightbox-img" src="" alt="Project Detail">
       <div class="lightbox-info">
@@ -29,6 +30,7 @@
     </div>
   </div>
 
+  <!-- Navigation -->
   <nav class="main-nav">
     <div class="nav-links">
       <a class="nav-item active" onclick="switchTab('home')">Home</a>
@@ -40,6 +42,7 @@
 
   <main id="main-container">
 
+    <!-- HOME -->
     <section id="home" class="panel active-panel">
       <div class="hero-text">
         <h1>MOHOMOZO</h1>
@@ -48,13 +51,14 @@
       </div>
     </section>
 
+    <!-- ABOUT -->
     <section id="about" class="panel">
       <div class="glass-card content-scroll">
         <div class="text-block">
           <h2>Artist Bio</h2>
           <p>Mohammad Mozafari is an experimental multimedia artist whose practice spans animation, painting, illustration, theater-based video production, and conceptual video art. His work explores emotional states, subconscious narratives, and the tension between personal identity and collective experience.</p>
         </div>
-        
+
         <div class="divider"></div>
 
         <div class="text-block">
@@ -65,12 +69,13 @@
         <div class="divider"></div>
 
         <div class="text-block">
-          <h2>Approach & Process</h2>
+          <h2>Approach &amp; Process</h2>
           <p>I approach each project as an open experiment. Improvisation, intuition, and material exploration guide my process. Accidents and unexpected outcomes often become the core of the final work.</p>
         </div>
       </div>
     </section>
 
+    <!-- PORTFOLIO -->
     <section id="portfolio" class="panel">
       <div class="glass-card full-width">
         <div class="portfolio-menu">
@@ -79,70 +84,92 @@
           <button onclick="filterPortfolio('illustration')">Illustration</button>
           <button onclick="filterPortfolio('animation')">Animation</button>
         </div>
-        
-        <div class="portfolio-grid" id="portfolio-grid">
-          <!-- Random things -->
-          <div class="portfolio-item animation">
-            <iframe style="aspect-ratio: 16 / 9;" src="https://drive.google.com/file/d/1tFMsgqX_5e_MynEWivfFGB3rhiW97ynd/preview" allow="autoplay; fullscreen"></iframe>
-            <div class="item-info">
-              <h3>Random things</h3>
-              <p>Animation (2023)</p>
-            </div>
-          </div>
 
-          <!-- mindset -->
-          <div class="portfolio-item animation">
-            <iframe style="aspect-ratio: 16 / 9;" src="https://drive.google.com/file/d/1zoG3dlY9RznrLbiKu2j7BRUnW9_RnrG5/preview" allow="autoplay; fullscreen"></iframe>
-            <div class="item-info">
-              <h3>mindset</h3>
-              <p>Animation (2023)</p>
-            </div>
-          </div>
-
-          <!-- sun -->
-          <div class="portfolio-item animation">
-            <iframe style="aspect-ratio: 16 / 9;" src="https://drive.google.com/file/d/1pLBsMpOfb_UruBAgs3CZM80v6O7hRLw6/preview" allow="autoplay; fullscreen"></iframe>
-            <div class="item-info">
-              <h3>sun</h3>
-              <p>Animation (2023)</p>
-            </div>
-          </div>
-
-          <!-- Dream loop -->
-          <div class="portfolio-item animation">
-            <iframe style="aspect-ratio: 16 / 9;" src="https://drive.google.com/file/d/1YAQ90R6n5OdksyU_S3G7Xj95abiRqQpB/preview" allow="autoplay; fullscreen"></iframe>
-            <div class="item-info">
-              <h3>Dream loop</h3>
-              <p>Animation (2022)</p>
-            </div>
-          </div>
-
-          <!-- The Dance -->
-          <div class="portfolio-item animation">
-            <iframe style="aspect-ratio: 16 / 9;" src="https://drive.google.com/file/d/1ndP1pEhpyB-1y8XFn2blo5g1IANHXpYt/preview" allow="autoplay; fullscreen"></iframe>
-            <div class="item-info">
-              <h3>The Dance</h3>
-              <p>Animation (2021)</p>
-            </div>
-          </div>
-
-          <!-- Remembering -->
-          <div class="portfolio-item animation">
-            <iframe style="aspect-ratio: 16 / 9;" src="https://drive.google.com/file/d/1POqQBuDXrf98p_7oLfgOyziuNwn6IeUM/preview" allow="autoplay; fullscreen"></iframe>
-            <div class="item-info">
-              <h3>Remembering</h3>
-              <p>Animation (2023)</p>
-            </div>
-          </div>
-        </div>
+        <div class="portfolio-grid" id="portfolio-grid"></div>
       </div>
     </section>
 
+    <!-- W.I.P -->
     <section id="work" class="panel">
-      <div class="glass-card full-width">
-        <h2>Ongoing Projects</h2>
-        <p style="margin-bottom: 2rem; opacity: 0.7;">Behind the scenes and experimental sketches.</p>
-        <div class="portfolio-grid" id="wip-grid"></div>
+      <div class="wip-showcase">
+        
+        <div class="wip-video-wrapper">
+          <iframe
+            src="https://drive.google.com/file/d/1-MQcMb5mxMwwQ5BzbKkneHPCCh-gA1mn/preview"
+            allow="autoplay; fullscreen"
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <div class="glass-card wip-details-glass">
+          <div class="wip-header">
+            <span class="wip-badge">Work in progress</span>
+            <h2 class="wip-title">ANIMATORE</h2>
+          </div>
+
+          <p class="wip-lead">
+            <strong>ANIMATORE</strong> is an independent animated short, 8 to 10 minutes long, developed over the past two years. It moves through three spaces: a closed room, a chamber of mirrors and a desert. The reel above shows the parts completed so far.
+          </p>
+
+          <div class="divider"></div>
+
+          <div class="wip-status">
+            <h3 class="wip-subtitle">Where the film stands <span class="wip-count">(12 sequences)</span></h3>
+
+            <ul class="sequence-list">
+              <li class="sequence-item is-complete">
+                <div class="seq-top">
+                  <span class="seq-name"><strong>Sequences 1 to 4</strong></span>
+                  <span class="seq-percent">Complete</span>
+                </div>
+                <div class="seq-bar"><div class="seq-fill" style="width: 100%;"></div></div>
+              </li>
+
+              <li class="sequence-item">
+                <div class="seq-top">
+                  <span class="seq-name"><strong>Sequence 5</strong></span>
+                  <span class="seq-percent">about 60% complete</span>
+                </div>
+                <div class="seq-bar"><div class="seq-fill" style="width: 60%;"></div></div>
+              </li>
+
+              <li class="sequence-item needs-funding">
+                <div class="seq-top">
+                  <span class="seq-name"><strong>Sequence 6</strong></span>
+                  <span class="seq-percent">about 30% complete</span>
+                </div>
+                <div class="seq-bar"><div class="seq-fill" style="width: 30%;"></div></div>
+                <p class="seq-note">This part needs funding for equipment and extra people.</p>
+              </li>
+
+              <li class="sequence-item">
+                <div class="seq-top">
+                  <span class="seq-name"><strong>Sequences 7 to 10</strong></span>
+                  <span class="seq-percent">about 50% complete</span>
+                </div>
+                <div class="seq-bar"><div class="seq-fill" style="width: 50%;"></div></div>
+                <p class="seq-note">The frame-by-frame coloring is still to do.</p>
+              </li>
+
+              <li class="sequence-item">
+                <div class="seq-top">
+                  <span class="seq-name"><strong>Sequence 11</strong></span>
+                  <span class="seq-percent">about 70% complete</span>
+                </div>
+                <div class="seq-bar"><div class="seq-fill" style="width: 70%;"></div></div>
+              </li>
+
+              <li class="sequence-item is-pending">
+                <div class="seq-top">
+                  <span class="seq-name"><strong>Sequence 12</strong></span>
+                  <span class="seq-percent">Not started</span>
+                </div>
+                <div class="seq-bar"><div class="seq-fill" style="width: 0%;"></div></div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
       </div>
     </section>
 
