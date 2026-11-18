@@ -147,35 +147,35 @@ body.view-detail .video-overlay {
   text-align: center;
 }
 
-.hero-text {
-  mix-blend-mode: difference;
-}
-
 .hero-text h1 {
+  mix-blend-mode: difference;
   font-family: 'Syncopate', sans-serif;
   font-size: clamp(2.4rem, 8vw, 6rem);
   letter-spacing: 0.2em;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   color: #eaeaea;
 }
 
 .hero-name {
   font-family: 'Syncopate', sans-serif;
-  font-size: 0.8rem;
-  letter-spacing: 0.4em;
+  font-size: clamp(1rem, 2.2vw, 1.35rem);
+  font-weight: 700;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  opacity: 0.8;
-  color: #eaeaea;
+  color: #ffffff;
+  opacity: 1;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.75);
 }
 
 .hero-subtitle {
-  margin-top: 1rem;
-  font-size: 0.9rem;
-  opacity: 0.6;
-  letter-spacing: 0.15em;
-  color: #eaeaea;
+  margin-top: 0.85rem;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.92);
+  opacity: 1;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.75);
 }
-
 /* --- GLASS CARD --- */
 .glass-card {
   background: rgba(18, 18, 24, 0.56);
